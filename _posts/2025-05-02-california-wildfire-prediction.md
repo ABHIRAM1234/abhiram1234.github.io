@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Fire in Focus: An analytical approach to analyzing wildfires
-image: "/posts/wildfire-prediction-title-img.jpeg"
+image: "/posts/wildfire-prediction-title-img.jpg"
 tags: [Machine Learning, Data Science, Classification, Python]
 ---
 

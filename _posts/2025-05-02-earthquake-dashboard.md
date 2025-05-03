@@ -9,4 +9,4 @@ This is a Tableau Dashboard that tracks global Earthquake activity across a 30-d
 It uses public USGS seismic data to show the magnitude, depth, and location of recent earthquakes.  
 You can interact with the map, filter by magnitude, and use the timeline slider to explore temporal patterns.
 
-<iframe seamless frameborder="0" src="https://public.tableau.com/views/DSIEarthquakeDashboard/DSIEarthquakeTracker" width="1090" height="900"></iframe>
+<iframe seamless frameborder="0" src="https://public.tableau.com/views/DSIEarthquakeDashboard/DSIEarthquakeTracker?:embed=yes&:display_count=yes&:showVizHome=no" width="1090" height="900"></iframe>
