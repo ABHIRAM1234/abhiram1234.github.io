@@ -109,4 +109,4 @@ This project provided several critical learnings:
 
 **Future Work:**
 *   **Productionization:** The next step would be to quantize the models (e.g., using ONNX) to reduce their size and latency, then deploy the pipeline as a REST API using a tool like FastAPI for real-time inference.
-*   **Model Exploration:** Experiment with even newer architectures (e.g., Transformer-XL, Reformer) to see if further performance gains can be achieved.
+*   **Model Exploration:** Experiment with even newer architectures (e.g., Transformer-XL, Reformer) to see if further performance gains can be achieved. 
