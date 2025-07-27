@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "LLaMA SQuAD: Specializing a Foundation Model for High-Stakes Question Answering"
-image: "/posts/llama_squad.png" 
+image: "/img/posts/llama_squad.png" 
 tags: [LLM, Fine-Tuning, PyTorch, QLoRA, MLOps, NLP]
 ---
 
