@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "End-to-End Twitter Sentiment Analysis with PySpark, Kafka, and Spark Streaming"
-image: "/img/posts/twitter-sentiment-analysis-architecture.png" # Recommendation: Use the architecture diagram as the main image
+image: "img/posts/twitter-sentiment-analysis-architecture.png" # Recommendation: Use the architecture diagram as the main image
 tags: [PySpark, Machine Learning, Data Engineering, Kafka, Spark Streaming, MLOps, NLP, Delta Lake]
 ---
 
