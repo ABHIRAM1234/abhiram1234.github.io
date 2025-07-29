@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "CU BookStore Work Scheduling: End-to-End AWS Automation for Employee Management"
-image: "/img/posts/cu-bookstore-scheduling.png"
+image: "/posts/cu-bookstore-scheduling.png"
 tags: [AWS, Data Engineering, Automation, Flask, Python, Airflow, Lambda, S3, RDS, DynamoDB, SQS, SES, MLOps]
 ---
 

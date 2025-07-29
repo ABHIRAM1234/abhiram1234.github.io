@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "M5 Forecasting: A Strategic Approach to Large-Scale Time-Series Forecasting"
-image: "img/posts/m5-forecasting-title-image.png"
+image: "/posts/m5-forecasting-title-image.png"
 tags: [Machine Learning, Time Series, Forecasting, LightGBM, Python, Pandas, MLOps]
 ---
 
