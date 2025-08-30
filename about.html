@@ -1,0 +1,230 @@
+---
+layout: default
+title: About Me
+---
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+    <div class="nav-container">
+        <a href="/" class="nav-link">Portfolio</a>
+        <a href="/about.html" class="nav-link active">About</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-12">
+            <div class="about-section">
+                <div class="about-content">
+                    <!-- Left Column - Profile Image -->
+                    <div class="about-image">
+                        <img src="/img/profile_picture.JPG" alt="Abhiram M V" class="profile-image">
+                    </div>
+                    
+                    <!-- Right Column - Text Content -->
+                    <div class="about-text">
+                        <h1 class="about-title">About Me</h1>
+                        
+                        <div class="about-summary">
+                            <p>I am a data scientist with 2+ years of experience in retail and supply chain.</p>
+                        </div>
+                        
+                        <div class="experience-section">
+                            <h2 class="section-title">Experience</h2>
+                            <ul class="experience-list">
+                                <li>
+                                    <div class="experience-item">
+                                        <div class="experience-date">May 2025 – August 2025</div>
+                                        <div class="experience-role">Product Research Intern @ConverSight</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="experience-item">
+                                        <div class="experience-date">August 2022 – July 2024</div>
+                                        <div class="experience-role">Data Engineer @ConverSight</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="experience-item">
+                                        <div class="experience-date">January 2022 – July 2022</div>
+                                        <div class="experience-role">Programmer Analyst @Cognizant Technology Solutions</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="education-section">
+                            <h2 class="section-title">Education</h2>
+                            <ul class="education-list">
+                                <li>
+                                    <div class="education-item">
+                                        <div class="education-date">2023 - 2025</div>
+                                        <div class="education-degree">Master of Science in Data Science</div>
+                                        <div class="education-school">University of Colorado Boulder</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="education-item">
+                                        <div class="education-date">2017 - 2021</div>
+                                        <div class="education-degree">Bachelor of Technology in Computer Science</div>
+                                        <div class="education-school">Amrita Vishwa Vidyapeetham</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Navigation Styles */
+.nav-bar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.about-section {
+    padding: 40px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-content {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.about-image {
+    flex: 0 0 400px;
+}
+
+.profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.about-text {
+    flex: 1;
+    padding-top: 20px;
+}
+
+.about-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    color: #333;
+}
+
+.about-summary {
+    margin-bottom: 40px;
+}
+
+.about-summary p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-decoration: underline;
+    color: #333;
+}
+
+.experience-list,
+.education-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.experience-item,
+.education-item {
+    margin-bottom: 25px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.experience-date,
+.education-date {
+    font-weight: 600;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.experience-role,
+.education-degree {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+}
+
+.education-school {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .about-image {
+        flex: none;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .about-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+}
+</style>
