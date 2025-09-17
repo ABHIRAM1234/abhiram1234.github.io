@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "H&M Personalized Fashion Recommendations: Iterative, Research-Driven Silver Medal Solution"
+title: "H&M Personalized Fashion Recommendations"
 image: "/posts/h&m-rec-sys-title-img.png"
 tags: [Recommender Systems, Machine Learning, Collaborative Filtering, Kaggle, Python, LightGBM, Deep Learning, Ensemble]
 ---
