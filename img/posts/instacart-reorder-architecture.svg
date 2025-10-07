@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500" font-family="Inter, Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .box { fill:#ffffff; stroke:#1f2937; stroke-width:2; rx:8; ry:8; }
+      .title { font-weight:700; fill:#111827; font-size:16px; }
+      .text { fill:#374151; font-size:13px; }
+      .arrow { stroke:#1f2937; stroke-width:2; marker-end:url(#arrowhead); fill:none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1f2937" />
+    </marker>
+  </defs>
+
+  <text x="550" y="40" text-anchor="middle" class="title" font-size="20">Instacart Reorder API – Cloud Run Architecture</text>
+
+  <rect x="40" y="90" width="250" height="120" class="box" />
+  <text x="165" y="120" text-anchor="middle" class="title">BigQuery</text>
+  <text x="165" y="145" text-anchor="middle" class="text">Feature store: user/product</text>
+  <text x="165" y="165" text-anchor="middle" class="text">behavioral aggregates</text>
+
+  <rect x="330" y="90" width="250" height="120" class="box" />
+  <text x="455" y="120" text-anchor="middle" class="title">Container (Flask/Gunicorn)</text>
+  <text x="455" y="145" text-anchor="middle" class="text">Loads XGBoost model +</text>
+  <text x="455" y="165" text-anchor="middle" class="text">serves /predict</text>
+
+  <rect x="620" y="90" width="220" height="120" class="box" />
+  <text x="730" y="120" text-anchor="middle" class="title">Cloud Run</text>
+  <text x="730" y="145" text-anchor="middle" class="text">Autoscaled, HTTPS endpoint</text>
+
+  <rect x="880" y="90" width="180" height="120" class="box" />
+  <text x="970" y="120" text-anchor="middle" class="title">Client</text>
+  <text x="970" y="145" text-anchor="middle" class="text">Web/Mobile/Service</text>
+
+  <line x1="290" y1="150" x2="330" y2="150" class="arrow" />
+  <line x1="580" y1="150" x2="620" y2="150" class="arrow" />
+  <line x1="840" y1="150" x2="880" y2="150" class="arrow" />
+
+  <rect x="330" y="260" width="250" height="120" class="box" />
+  <text x="455" y="290" text-anchor="middle" class="title">Artifacts (GCS)</text>
+  <text x="455" y="315" text-anchor="middle" class="text">Model .bst and feature</text>
+  <text x="455" y="335" text-anchor="middle" class="text">schemas/config</text>
+
+  <line x1="455" y1="210" x2="455" y2="260" class="arrow" />
+  <line x1="455" y1="380" x2="455" y2="430" class="arrow" />
+  <text x="455" y="450" text-anchor="middle" class="text">CI/CD builds container → Cloud Run</text>
+</svg>
+
