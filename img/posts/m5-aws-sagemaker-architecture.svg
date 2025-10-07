@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" font-family="Inter, Arial, Helvetica, sans-serif">
+  <defs>
+    <style>
+      .box { fill:#ffffff; stroke:#1f2937; stroke-width:2; rx:8; ry:8; }
+      .title { font-weight:700; fill:#111827; font-size:16px; }
+      .text { fill:#374151; font-size:14px; }
+      .arrow { stroke:#1f2937; stroke-width:2; marker-end:url(#arrowhead); fill:none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#1f2937" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" class="title" font-size="20">M5 Walmart Sales Forecasting – AWS Batch Architecture</text>
+
+  <!-- Row 1: Data Sources -->
+  <rect x="60" y="80" width="300" height="120" class="box" />
+  <text x="210" y="110" text-anchor="middle" class="title">Amazon S3</text>
+  <text x="210" y="135" text-anchor="middle" class="text">Raw: sales, calendar, prices</text>
+  <text x="210" y="155" text-anchor="middle" class="text">Processed features & predictions</text>
+
+  <rect x="420" y="80" width="300" height="120" class="box" />
+  <text x="570" y="110" text-anchor="middle" class="title">SageMaker Studio</text>
+  <text x="570" y="135" text-anchor="middle" class="text">Notebooks for cleaning & EDA</text>
+  <text x="570" y="155" text-anchor="middle" class="text">Pandas/NumPy → S3</text>
+
+  <rect x="780" y="80" width="360" height="120" class="box" />
+  <text x="960" y="110" text-anchor="middle" class="title">AWS IAM</text>
+  <text x="960" y="135" text-anchor="middle" class="text">Scoped access to S3, SageMaker,</text>
+  <text x="960" y="155" text-anchor="middle" class="text">QuickSight; least-privilege roles</text>
+
+  <!-- Arrows Row 1 -->
+  <line x1="360" y1="140" x2="420" y2="140" class="arrow" />
+  <line x1="720" y1="140" x2="780" y2="140" class="arrow" />
+
+  <!-- Row 2: Processing/Training -->
+  <rect x="60" y="260" width="300" height="120" class="box" />
+  <text x="210" y="290" text-anchor="middle" class="title">SageMaker Processing</text>
+  <text x="210" y="315" text-anchor="middle" class="text">Feature engineering (lags, rolls,</text>
+  <text x="210" y="335" text-anchor="middle" class="text">price momentum, SNAP flags)</text>
+
+  <rect x="420" y="260" width="300" height="120" class="box" />
+  <text x="570" y="290" text-anchor="middle" class="title">SageMaker Training</text>
+  <text x="570" y="315" text-anchor="middle" class="text">LightGBM model training</text>
+  <text x="570" y="335" text-anchor="middle" class="text">Artifacts → S3 (versioned)</text>
+
+  <rect x="780" y="260" width="360" height="120" class="box" />
+  <text x="960" y="290" text-anchor="middle" class="title">CloudWatch</text>
+  <text x="960" y="315" text-anchor="middle" class="text">Metrics, logs & alerts for</text>
+  <text x="960" y="335" text-anchor="middle" class="text">Processing/Training/Transform</text>
+
+  <!-- Arrows Row 2 -->
+  <line x1="210" y1="200" x2="210" y2="260" class="arrow" />
+  <line x1="360" y1="320" x2="420" y2="320" class="arrow" />
+  <line x1="720" y1="320" x2="780" y2="320" class="arrow" />
+
+  <!-- Row 3: Orchestration & Inference -->
+  <rect x="60" y="440" width="300" height="120" class="box" />
+  <text x="210" y="470" text-anchor="middle" class="title">AWS Step Functions</text>
+  <text x="210" y="495" text-anchor="middle" class="text">Schedule via EventBridge</text>
+  <text x="210" y="515" text-anchor="middle" class="text">DAG: ingest → features → train/score</text>
+
+  <rect x="420" y="440" width="300" height="120" class="box" />
+  <text x="570" y="470" text-anchor="middle" class="title">Batch Transform</text>
+  <text x="570" y="495" text-anchor="middle" class="text">Score thousands of SKUs</text>
+  <text x="570" y="515" text-anchor="middle" class="text">Predictions → S3</text>
+
+  <rect x="780" y="440" width="360" height="120" class="box" />
+  <text x="960" y="470" text-anchor="middle" class="title">Amazon QuickSight</text>
+  <text x="960" y="495" text-anchor="middle" class="text">Dashboards (Athena/S3 or RDS)</text>
+  <text x="960" y="515" text-anchor="middle" class="text">Merchandising & marketing views</text>
+
+  <!-- Arrows Row 3 -->
+  <line x1="210" y1="380" x2="210" y2="440" class="arrow" />
+  <line x1="360" y1="500" x2="420" y2="500" class="arrow" />
+  <line x1="720" y1="500" x2="780" y2="500" class="arrow" />
+
+  <!-- Back edges to S3 -->
+  <line x1="570" y1="560" x2="210" y2="140" class="arrow" stroke-dasharray="6 6" />
+  <text x="420" y="590" class="text">Predictions & features in S3</text>
+
+  <!-- Footer note -->
+  <text x="600" y="660" text-anchor="middle" class="text">Serverless batch pipeline with least-privilege IAM; monitored via CloudWatch</text>
+</svg>
+
