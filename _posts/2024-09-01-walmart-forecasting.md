@@ -16,6 +16,7 @@ tags: [Machine Learning, Time Series, Forecasting, LightGBM, Python, Pandas, MLO
 - [04. Modeling Strategy](#modeling)
     - [Baseline and Optimization](#modeling-champion1)
     - [Why Not ARIMA/Prophet or LSTM?](#modeling-tradeoffs)
+    - [Neural Baselines and Ensembling](#modeling-neural)
 - [05. Evaluation & Results](#prediction)
 - [06. Production Deployment on AWS](#deployment)
 - [07. Key Learnings](#conclusion)
@@ -267,6 +268,71 @@ valid_pred = np.expm1(model.predict(valid[feature_cols]))
 ```
 * **Classical (ARIMA/Prophet):** Strong for single series, but difficult to scale efficiently to 30k+ SKUs with rich covariates; weaker on heterogeneous cross‑sectional effects like price and SNAP.
 * **Deep (LSTM):** Viable, but heavier to train/tune and offered marginal gains over boosted trees on tabular features here. Empirically, well‑engineered LightGBM with covariates performed best for effort vs accuracy.
+
+<a name="modeling-neural"></a>
+### Neural Baselines and Ensembling
+
+I also validated sequence models to cross‑check patterns the tree model might miss. A compact PyTorch LSTM baseline was trained per SKU‑store sequence using covariates (price, calendar, SNAP) as exogenous inputs; its predictions were blended with LightGBM via rank averaging.
+
+```python
+import torch
+import torch.nn as nn
+from torch.utils.data import Dataset, DataLoader
+
+SEQ_LEN = 56
+HORIZON = 28
+
+class SeriesDataset(Dataset):
+    def __init__(self, X_seq, y_seq):
+        self.X_seq = X_seq  # shape [N, SEQ_LEN, num_features]
+        self.y_seq = y_seq  # shape [N, HORIZON]
+    def __len__(self):
+        return self.X_seq.shape[0]
+    def __getitem__(self, idx):
+        return torch.from_numpy(self.X_seq[idx]).float(), torch.from_numpy(self.y_seq[idx]).float()
+
+class LSTMForecaster(nn.Module):
+    def __init__(self, num_features: int, hidden_size: int = 64, num_layers: int = 2):
+        super().__init__()
+        self.lstm = nn.LSTM(input_size=num_features, hidden_size=hidden_size, num_layers=num_layers, batch_first=True)
+        self.head = nn.Linear(hidden_size, HORIZON)
+    def forward(self, x):  # x: [B, T, F]
+        out, _ = self.lstm(x)
+        last = out[:, -1, :]             # [B, H]
+        return self.head(last)            # [B, HORIZON]
+
+def train_epoch(model, loader, optim, loss_fn):
+    model.train()
+    total = 0.0
+    for xb, yb in loader:
+        optim.zero_grad()
+        pred = model(xb)
+        loss = loss_fn(pred, yb)
+        loss.backward()
+        optim.step()
+        total += loss.item() * xb.size(0)
+    return total / len(loader.dataset)
+
+# X_seq, y_seq prepared from lagged sales + covariates; WRMSSE requires post-processing
+num_features = X_seq.shape[2]
+ds = SeriesDataset(X_seq, y_seq)
+dl = DataLoader(ds, batch_size=256, shuffle=True, num_workers=2)
+
+model = LSTMForecaster(num_features)
+optim = torch.optim.Adam(model.parameters(), lr=1e-3)
+loss_fn = nn.L1Loss()  # MAE often stabilizes training for demand series
+
+for epoch in range(10):
+    train_loss = train_epoch(model, dl, optim, loss_fn)
+
+# Inference: blend with LightGBM via rank averaging
+# lgbm_preds: [N, HORIZON], lstm_preds: [N, HORIZON]
+# blended = 0.5 * rank_norm(lgbm_preds) + 0.5 * rank_norm(lstm_preds)
+```
+
+Notes:
+- Variants explored: GRU in place of LSTM, 1D‑CNN encoder, small Transformer encoder on short windows. Training time and tuning complexity were higher than boosted trees for similar validation WRMSSE.
+- Best result came from a light blend (30–50%) of the neural model with LightGBM, marginally improving stability on certain promotion‑driven SKUs.
 
 ___
 

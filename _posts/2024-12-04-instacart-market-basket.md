@@ -22,6 +22,12 @@ tags: [Recommendation Systems, Market Basket Analysis, Machine Learning, Python,
 
 Unified two complementary Instacart projects into one end-to-end solution: exploratory analytics, segmentation, and association rules, followed by a production-grade reorder prediction model deployed as a real-time API.
 
+At a glance
+- Objective: predict next-order reorders to grow basket size and retention
+- Approach: MBA + Segmentation for candidates and insights; XGBoost ranker for final predictions
+- Serving: Flask API on Cloud Run; BigQuery-backed features; Docker for reproducibility
+- Highlights: interview-ready narrative with code, diagrams, and deployment steps
+
 How I’d summarize this in an interview: I framed the business problem around increasing reorder rate and basket size. I cleaned and modeled the Instacart dataset to understand customer behavior, used MBA and segmentation for insights and candidate generation, and built an XGBoost-based reorder model exposed via a low-latency API on Cloud Run.
 
 ---
@@ -162,11 +168,23 @@ POST http://127.0.0.1:5000/predict
 Body: {"user_id": 1}
 ```
 
+Sample response
+
+```json
+{
+  "user_id": 1,
+  "products": [196, 493, 24852, 13176, 27845, 21137, 47209, 16797, 21903, 47626],
+  "scores": [0.91, 0.88, 0.86, 0.84, 0.82, 0.80, 0.79, 0.77, 0.76, 0.75]
+}
+```
+
 Architecture
 
 ![Instacart API Architecture](/img/posts/instacart-reorder-architecture.svg)
 
 <sub>Figure: Minimal real-time API on Cloud Run with Docker, pulling features from BigQuery and model artifacts from GCS (or local volume in dev).</sub>
+
+
 
 Minimal Flask API (deployment/app.py)
 

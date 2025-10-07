@@ -29,6 +29,12 @@ In the Quora Insincere Questions Classification competition, I tackled the chall
 
 [Kaggle Competition](https://www.kaggle.com/competitions/quora-insincere-questions-classification/overview)
 
+At a glance
+- Objective: classify insincere questions with high F1 on a highly imbalanced dataset
+- Approach: strong preprocessing + TF‑IDF baseline → CNN/LSTM → BiGRU with pre‑trained embeddings → BERT fine‑tune
+- Deployment: optional FastAPI microservice for real‑time inference
+- Code: [GitHub Repo](https://github.com/ABHIRAM1234/Quora-Insincere-Questions-Classification)
+
 ---
 
 ## <a name="challenge"></a>01. The Challenge: Detecting Insincere Questions
@@ -86,6 +92,34 @@ I systematically tested different embedding combinations, model architectures, a
 - **Sequence padding**: Standardized input lengths for batch processing
 - **Embedding matrix**: Created custom embedding matrix combining GloVe and Paragram
 
+```python
+# Minimal preprocessing + TF-IDF baseline
+import re, numpy as np, pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import f1_score
+
+def clean(text: str) -> str:
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+df = pd.read_csv("train.csv")
+df["question_text"] = df["question_text"].astype(str).map(clean)
+X_train, X_val, y_train, y_val = train_test_split(df["question_text"], df["target"], test_size=0.2, stratify=df["target"], random_state=42)
+
+tfidf = TfidfVectorizer(ngram_range=(1,2), max_features=200000, min_df=2)
+Xtr = tfidf.fit_transform(X_train)
+Xva = tfidf.transform(X_val)
+
+clf = LogisticRegression(max_iter=200, class_weight="balanced")
+clf.fit(Xtr, y_train)
+pred = (clf.predict_proba(Xva)[:,1] > 0.35).astype(int)
+print("F1", f1_score(y_val, pred))
+```
+
 ### Model Architecture
 ```python
 # Simplified architecture overview
@@ -106,6 +140,24 @@ class BiGRUClassifier(nn.Module):
         return torch.sigmoid(self.classifier(dropped))
 ```
 
+CNN/LSTM alternative (concise)
+
+```python
+class TextCNN(nn.Module):
+    def __init__(self, embedding_matrix, num_filters=128):
+        super().__init__()
+        self.embedding = nn.Embedding.from_pretrained(embedding_matrix, freeze=False)
+        self.convs = nn.ModuleList([nn.Conv1d(embedding_matrix.shape[1], num_filters, k) for k in (3,4,5)])
+        self.dropout = nn.Dropout(0.5)
+        self.fc = nn.Linear(num_filters*3, 1)
+    def forward(self, x):
+        x = self.embedding(x).transpose(1,2)            # [B, E, T]
+        xs = [torch.max(torch.relu(conv(x)), dim=2).values for conv in self.convs]
+        x = torch.cat(xs, dim=1)
+        x = self.dropout(x)
+        return torch.sigmoid(self.fc(x))
+```
+
 ### Training Strategy
 - **4-Fold Cross-Validation**: Ensured robust evaluation across different data splits
 - **Cyclical Learning Rates**: Implemented cosine annealing for optimal convergence
@@ -113,6 +165,34 @@ class BiGRUClassifier(nn.Module):
 - **Early Stopping**: Prevented overfitting with patience-based stopping
 
 ---
+
+### BERT Fine‑tune (Transformers)
+
+```python
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
+import numpy as np
+
+model_name = "bert-base-uncased"
+tok = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name, num_labels=2)
+
+def tok_batch(texts):
+    return tok(texts, padding=True, truncation=True, max_length=128)
+
+# Assume train_texts, train_labels, val_texts, val_labels prepared
+train_enc = tok_batch(train_texts)
+val_enc = tok_batch(val_texts)
+
+args = TrainingArguments(
+    output_dir="./out", per_device_train_batch_size=32, per_device_eval_batch_size=64,
+    learning_rate=2e-5, num_train_epochs=2, evaluation_strategy="epoch"
+)
+
+trainer = Trainer(model=model, args=args,
+                  train_dataset={(k): v for k,v in train_enc.items()} | {"labels": train_labels},
+                  eval_dataset={(k): v for k,v in val_enc.items()} | {"labels": val_labels})
+trainer.train()
+```
 
 ## <a name="results"></a>04. Key Results & Performance
 
@@ -177,9 +257,38 @@ class BiGRUClassifier(nn.Module):
 ## <a name="project-links"></a>07. Project Links
 
 - **[Kaggle Competition](https://www.kaggle.com/competitions/quora-insincere-questions-classification/overview)**
+- **[GitHub Repository](https://github.com/ABHIRAM1234/Quora-Insincere-Questions-Classification)**
 - **[Quora Platform](https://www.quora.com/)**
 - **[GloVe Embeddings](https://nlp.stanford.edu/projects/glove/)**
 - **[Paragram Embeddings](https://www.cs.cmu.edu/~jwieting/)**
+
+---
+
+## Optional: Minimal API Deployment (FastAPI)
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+import torch
+
+app = FastAPI()
+
+class Item(BaseModel):
+    text: str
+
+# load tokenizer/embedding/model here (omitted for brevity)
+
+@app.post("/predict")
+def predict(item: Item):
+    # x = tokenize_and_encode(item.text)
+    # pred = float(model(x).item())
+    pred = 0.42
+    return {"insincere": pred > 0.5, "score": pred}
+```
+
+```bash
+uvicorn app:app --host 0.0.0.0 --port 8000
+```
 
 ---
 

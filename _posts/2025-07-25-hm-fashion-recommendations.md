@@ -28,6 +28,12 @@ In the H&M Personalized Fashion Recommendations Kaggle competition, I set out to
 
 [GitHub Repository](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)
 
+At a glance
+- Objective: maximize MAP@12 by recommending next‑week purchases per customer
+- Approach: two‑stage system (diverse retrieval → feature‑rich ranking) with ensembling
+- Scale: 31M+ transactions, 1M+ customers, 100K+ products; RAM‑aware pipeline
+- Links: Kaggle competition and code in repo for reproducibility
+
 ---
 
 ## <a name="challenge-context"></a>01. The Challenge & Business Context
@@ -149,6 +155,20 @@ I implemented a sophisticated ensemble approach:
 Data Ingestion → Feature Engineering → Candidate Generation → Model Training → Ensemble → Prediction
 ```
 
+Offline batch pipeline
+
+```text
+Raw parquet → feature build (weekly) → retrieval (ALS, co‑purchase, rules)
+      │                                │
+      └──────────── merge candidates ──┘
+                          │
+                 ranker inference (LGBM + DNN)
+                          │
+                 blend and take Top‑12 per customer
+                          │
+                    write submission/predictions
+```
+
 ### Key Technical Components
 
 #### 1. Data Pipeline
@@ -174,6 +194,113 @@ Given hardware constraints (50GB RAM), I implemented several optimizations:
 
 ---
 
+### Candidate Generation: Implicit ALS (collaborative filtering)
+
+```python
+# Minimal ALS with implicit library
+import pandas as pd
+import scipy.sparse as sp
+from implicit.als import AlternatingLeastSquares
+
+# transactions: columns [customer_id, article_id, t_dat]
+df = pd.read_csv("transactions_train.csv", usecols=["customer_id","article_id"]) 
+
+# Encode ids
+cust_map = {c:i for i,c in enumerate(df.customer_id.unique())}
+item_map = {a:i for i,a in enumerate(df.article_id.unique())}
+df["u"] = df.customer_id.map(cust_map)
+df["i"] = df.article_id.map(item_map)
+
+# Build sparse matrix (items x users) with counts
+mat = sp.coo_matrix((
+    pd.Series(1, index=df.index).astype(float),
+    (df["i"].values, df["u"].values)
+))
+
+als = AlternatingLeastSquares(factors=64, regularization=0.02, iterations=15)
+als.fit(mat.tocsr())
+
+def recall_candidates(user_internal_id, N=50):
+    ids, scores = als.recommend(userid=user_internal_id, user_items=mat.T.tocsr(), N=N)
+    inv_item = {v:k for k,v in item_map.items()}
+    return [inv_item[i] for i in ids]
+```
+
+### Candidate Generation: Co‑purchase recall (association rules‑style)
+
+```python
+import pandas as pd
+
+tx = pd.read_csv("transactions_train.csv", usecols=["customer_id","article_id","t_dat"]) 
+tx = tx.sort_values(["customer_id","t_dat"]) 
+
+# Build item→co‑occurrence counts within customer baskets (weekly window optional)
+pairs = (
+    tx.groupby("customer_id").article_id.apply(lambda x: pd.Series(list(set(x))))
+      .reset_index().rename(columns={"article_id":"aid"})
+)
+
+co_counts = {}
+for _, grp in pairs.groupby("customer_id"):
+    items = grp["aid"].tolist()
+    for a in items:
+        for b in items:
+            if a==b: 
+                continue
+            co_counts[(a,b)] = co_counts.get((a,b), 0) + 1
+
+# For a given recently purchased item a, suggest top co‑purchased b
+def copurchase_top(aid, k=20):
+    cands = [(b,c) for (a,b),c in co_counts.items() if a==aid]
+    return [b for b,_ in sorted(cands, key=lambda t: -t[1])[:k]]
+```
+
+### Ranking: LightGBM Ranker (feature‑rich)
+
+```python
+import lightgbm as lgb
+import pandas as pd
+
+# candidates_df: one row per (customer, article) with engineered features and a relevance label (for CV)
+features = [c for c in candidates_df.columns if c not in ("customer_id","article_id","label","group")]
+
+# group: number of candidates per customer needed for LGBM ranker
+train = candidates_df[candidates_df["fold"] != 0]
+valid = candidates_df[candidates_df["fold"] == 0]
+
+lgb_train = lgb.Dataset(train[features], label=train["label"], group=train.groupby("customer_id").size().values)
+lgb_valid = lgb.Dataset(valid[features], label=valid["label"], group=valid.groupby("customer_id").size().values)
+
+params = {
+    "objective": "lambdarank",
+    "metric": "map",
+    "learning_rate": 0.05,
+    "num_leaves": 255,
+    "min_data_in_leaf": 200,
+}
+model = lgb.train(params, lgb_train, valid_sets=[lgb_valid], num_boost_round=2000, early_stopping_rounds=200)
+
+scores = model.predict(valid[features])
+```
+
+### Ranking: Minimal DNN ranker (embeddings)
+
+```python
+import torch, torch.nn as nn
+
+class DNNRanker(nn.Module):
+    def __init__(self, in_dim):
+        super().__init__()
+        self.net = nn.Sequential(
+            nn.Linear(in_dim, 256), nn.ReLU(), nn.Dropout(0.2),
+            nn.Linear(256, 128), nn.ReLU(), nn.Dropout(0.2),
+            nn.Linear(128, 1)
+        )
+    def forward(self, x):
+        return self.net(x)
+
+ranker = DNNRanker(len(features))
+```
 ## <a name="key-results"></a>04. Key Results & Performance
 
 ### Competition Performance
