@@ -20,6 +20,9 @@ tags: [Recommender Systems, Machine Learning, Collaborative Filtering, Kaggle, P
 
 ## <a name="project-overview"></a>00. Project Overview
 
+**What this project is (in plain English):**  
+I built a **personalized fashion recommendation system** for the **H&M Kaggle competition**. The task: for each customer, **predict which items they will purchase in the next week** and output a ranked list of up to 12 products (MAP@12). The data is huge: **31M+ transactions**, **1M+ customers**, **100K+ products**, so we cannot score every user × product pair. I used a **two-stage pipeline**: (1) **Retrieval (Stage 1)**—two distinct recall strategies (collaborative filtering with embeddings, plus co-purchase/popularity/temporal rules) to generate a small set of **candidates** per user (~50 per user, 4 weeks of training data, 50GB RAM–optimized); (2) **Ranking (Stage 2)**—three models (LightGBM Ranker, LightGBM Classifier, DNN) trained on engineered features and **ensembled** to produce the final Top-12. The key insight: **ensemble diversity**—the two recall strategies produce different candidates, and combining them with the three rankers gave a **+0.0006** lift (single strategy 0.0286 → ensemble 0.0292). My solution earned a **Silver Medal (Top 2%)**, ranking 45th out of 3,006 teams. I approached the project step by step: problem framing → EDA and baselines → candidate generation (two strategies) → feature engineering → ranking models and ensemble → optimization and deployment, so someone who doesn't know the project can follow the entire thought process.
+
 **🏆 Silver Medal Achievement**: Top 2% performance in one of Kaggle's most competitive recommendation system competitions with 3,006 teams
 
 In the H&M Personalized Fashion Recommendations Kaggle competition, I set out to build a state-of-the-art recommendation system for a global fashion retailer. The challenge: predict which items each customer would purchase next, using a massive dataset of 31M+ transactions, 1M+ customers, and 100K+ products. My solution earned a **Silver Medal (Top 2%)**, ranking 45th out of 3,006 teams.
@@ -29,10 +32,11 @@ In the H&M Personalized Fashion Recommendations Kaggle competition, I set out to
 [GitHub Repository](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)
 
 At a glance
-- Objective: maximize MAP@12 by recommending next‑week purchases per customer
-- Approach: two‑stage system (diverse retrieval → feature‑rich ranking) with ensembling
-- Scale: 31M+ transactions, 1M+ customers, 100K+ products; RAM‑aware pipeline
-- Links: Kaggle competition and code in repo for reproducibility
+- **Scores**: Public 0.0292, Private 0.02996
+- **Architecture**: Two-stage retrieval + ranking (two recall strategies → LightGBM + DNN ensemble)
+- **Objective**: Maximize MAP@12 by recommending next‑week purchases per customer
+- **Scale**: 31M+ transactions, 1M+ customers, 100K+ products; pipeline optimized for 50GB RAM (~50 candidates per user, 4 weeks training data)
+- **Ensemble gain**: Single-strategy 0.0286 → ensemble 0.0292 (+0.0006)
 
 ---
 
@@ -97,41 +101,38 @@ I engineered hundreds of features across multiple categories:
 - **Sequential Patterns**: Purchase sequences and transitions
 - **Contextual Features**: Purchase context (weekday, holiday, etc.)
 
-### Phase 4: Multi-Strategy Candidate Generation
-I implemented a diverse candidate generation approach:
+### Phase 4: Multi-Strategy Candidate Generation (Stage 1 – Retrieval)
+I implemented **two distinct recall strategies** to ensure candidate diversity (matching the [repo architecture](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)):
 
-#### 1. Collaborative Filtering with Implicit ALS
-- **Implementation**: Used [julian3833's approach](https://www.kaggle.com/code/julian3833/h-m-implicit-als-model-0-014)
-- **Advantage**: Captures latent user-item relationships
-- **Challenge**: Requires careful hyperparameter tuning
+#### 1. Collaborative Filtering (ALS, BPR) & embeddings
+- **Implicit ALS**: Latent user-item relationships ([e.g. julian3833](https://www.kaggle.com/code/julian3833/h-m-implicit-als-model-0-014))
+- **Pre-trained embeddings**: DSSM, YouTube-style, Word2Vec (CBOW/Skip-gram), and image-based embeddings for items/users/products
+- **Advantage**: Captures latent preferences and semantic similarity
 
-#### 2. Co-purchase Analysis
-- **Implementation**: Leveraged [cdeotte's co-purchase strategy](https://www.kaggle.com/code/cdeotte/recommend-items-purchased-together-0-021)
-- **Advantage**: Captures strong product associations
-- **Application**: Used for both candidate generation and feature engineering
+#### 2. Co-purchase, popularity & temporal rules
+- **Co-purchase**: [cdeotte's strategy](https://www.kaggle.com/code/cdeotte/recommend-items-purchased-together-0-021) for product associations
+- **Popularity-based & temporal patterns**: Recency, seasonal and trend-based rules
+- **Cold-start**: Popular items for new customers
 
-#### 3. Heuristic Rules
-- **Time-based Rules**: Recent purchases, seasonal patterns
-- **Category-based Rules**: Customer's preferred categories
-- **Cold-start Handling**: Popular items for new customers
+The two strategies produce different candidate sets, which is key to the ensemble improvement (single strategy 0.0286 → ensemble 0.0292).
 
-### Phase 5: Advanced Ranking Models
-With diverse candidates, I developed sophisticated ranking models:
+### Phase 5: Ranking Models (Stage 2 – Ranking)
+With diverse candidates from the two recall strategies, I trained **three ranking models** (per the [repo](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)) and blended them:
 
 #### LightGBM Ranker
-- **Purpose**: Learn optimal ranking of candidates
-- **Features**: Combined all engineered features
-- **Advantage**: Handles non-linear interactions effectively
+- **Purpose**: Learn optimal ranking of candidates (LambdaRank/MAP)
+- **Features**: Engineered temporal, behavioral, and product features
+- **Advantage**: Handles non-linear interactions and ranking objective
 
 #### LightGBM Classifier
 - **Purpose**: Binary classification of purchase probability
-- **Features**: Focused on purchase likelihood
-- **Advantage**: Direct probability estimates
+- **Features**: Same feature set, classification objective
+- **Advantage**: Direct probability estimates for blending
 
-#### Deep Neural Network
+#### Deep Neural Network (DNN)
 - **Purpose**: Capture complex non-linear patterns
-- **Architecture**: Multi-layer perceptron with embeddings
-- **Advantage**: Can learn complex feature interactions
+- **Architecture**: Multi-layer perceptron fed with embedding and tabular features
+- **Advantage**: Complements tree-based models in the ensemble
 
 ### Phase 6: Ensemble Strategy & Optimization
 I implemented a sophisticated ensemble approach:
@@ -186,9 +187,13 @@ Raw parquet → feature build (weekly) → retrieval (ALS, co‑purchase, rules)
 - **Weight Optimization**: Systematic search for optimal combinations
 - **Robustness**: Multiple validation strategies
 
+### Repo structure (aligned with [GitHub](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations))
+- **Data**: `data/raw/` (articles, customers, transactions_train, sample_submission); `data/external/` for pre-trained embeddings (DSSM, YouTube-style, Word2Vec, image).
+- **Code**: `src/data` (DataHelper, metrics), `src/features` (base_features), `src/retrieval` (collector, rules); `notebooks/` for the pipeline (e.g. LGB Recall 1, then ranking/ensemble).
+
 ### Scalability Considerations
 Given hardware constraints (50GB RAM), I implemented several optimizations:
-- **Data Sampling**: Strategic sampling for model development
+- **Candidates**: ~50 candidates per user; 4 weeks of training data
 - **Batch Processing**: Efficient handling of large datasets
 - **Memory Management**: Careful memory allocation and cleanup
 
@@ -306,13 +311,13 @@ ranker = DNNRanker(len(features))
 ### Competition Performance
 - **Final Rank**: 45th out of 3,006 teams (Top 2%)
 - **Medal**: Silver Medal
-- **Public Leaderboard**: 0.0292
-- **Private Leaderboard**: 0.02996
+- **Public Leaderboard**: **0.0292**
+- **Private Leaderboard**: **0.02996**
 
 ### Model Performance Analysis
-- **Baseline Improvement**: 300%+ improvement over simple baselines
-- **Ensemble Gain**: 15% improvement through strategic ensembling
-- **Robustness**: Consistent performance across validation splits
+- **Single recall strategy**: 0.0286
+- **Ensemble (two strategies + LGB + DNN blend)**: 0.0292 (**+0.0006** improvement from ensemble diversity)
+- **Robustness**: Consistent performance across validation splits; pipeline tuned for 50GB RAM (~50 candidates per user, 4 weeks training data)
 
 ### Business Impact
 - **Scalability**: Solution can handle millions of customers and products efficiently
@@ -376,7 +381,11 @@ ranker = DNNRanker(len(features))
 
 This project benefited significantly from the Kaggle community's collective knowledge:
 
-### Key Influences
+### Repository & base implementation
+- **This portfolio project**: [ABHIRAM1234/H-M-Fashion-Recommendations](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations) — solution to Kaggle H&M Personalized Fashion Recommendations (two-stage retrieval + ranking, LightGBM + DNN ensemble).
+- **Forked from / builds upon**: [Wp-Zhang/H-M-Fashion-RecSys](https://github.com/Wp-Zhang/H-M-Fashion-RecSys), with enhancements to documentation, structure, and pipeline.
+
+### Kaggle community influences
 - [Vanguarde's EDA](https://www.kaggle.com/code/vanguarde/h-m-eda-first-look): Comprehensive exploratory analysis
 - [cdeotte's Co-purchase Strategy](https://www.kaggle.com/code/cdeotte/recommend-items-purchased-together-0-021): Association rule mining
 - [julian3833's ALS Model](https://www.kaggle.com/code/julian3833/h-m-implicit-als-model-0-014): Collaborative filtering implementation
@@ -394,7 +403,7 @@ This project benefited significantly from the Kaggle community's collective know
 
 ## <a name="project-links"></a>08. Project Links
 
-- **[GitHub Repository](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)**
+- **[GitHub – H-M-Fashion-Recommendations](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)** — Solution to Kaggle H&M Personalized Fashion Recommendations (two-stage retrieval + ranking, LightGBM + DNN ensemble)
 - **[Kaggle Competition](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations)**
 - **[Competition Notebooks](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/code)**
 

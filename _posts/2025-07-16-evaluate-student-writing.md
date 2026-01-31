@@ -171,4 +171,10 @@ This project showcases the ability to deliver **innovative AI solutions** that d
 
 **Future Work:**
 *   **Productionization:** The next step would be to quantize the models (e.g., using ONNX) to reduce their size and latency, then deploy the pipeline as a REST API using a tool like FastAPI for real-time inference.
-*   **Model Exploration:** Experiment with even newer architectures (e.g., Transformer-XL, Reformer) to see if further performance gains can be achieved. 
+*   **Model Exploration:** Experiment with even newer architectures (e.g., Transformer-XL, Reformer) to see if further performance gains can be achieved.
+
+---
+
+### Project Links
+
+- **[GitHub Repository](https://github.com/ABHIRAM1234/Evaluating-Student-Writing/tree/main)** — Code, notebooks, and documentation for the Feedback Prize / Evaluating Student Writing project

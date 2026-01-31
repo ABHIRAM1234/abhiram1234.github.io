@@ -19,15 +19,19 @@ tags: [Credit Risk, Machine Learning, Gradient Boosting, Feature Engineering, Op
 
 ## <a name="overview"></a>00. Project Overview
 
+**What this project is (in plain English):**  
+I built an **end-to-end credit default risk model** for the American Express Kaggle competition. The task: given a customer's **historical monthly credit card statements** (many months of balance, payment, and delinquency features), **predict whether they will default** in the next period. The goal is to **rank customers by default risk** so the business can reduce credit losses (better risk ranking) while keeping approval friction low (precision in the top deciles matters). The data is **sequential tabular** (one row per customer per month), so I **aggregated** each customer's history into summary features (means, stds, last values, trends) and trained **LightGBM** optimized for the **custom AmEx metric** (a ranking-focused metric). I tuned hyperparameters with **Optuna**, validated with a **time-aware split** (no future leakage), and used **Databricks + MLflow** for experimentation and model registry. The feature pipeline is scalable (e.g. PySpark) and the code is structured for readability and reproducibility.
+
 Interview summary: I built an end-to-end credit default risk model for the American Express Kaggle competition. The core challenges were heavy class imbalance, a custom evaluation metric (AmEx metric), and large-scale sequential tabular data that benefits from strong feature aggregation and regularization. I used LightGBM with carefully engineered aggregations, tuned via Optuna, and validated with a time-aware split. 
 
 **Kaggle:** [AmEx Default Prediction](https://www.kaggle.com/competitions/amex-default-prediction)
 
-At a glance
-- Objective: rank customers by default risk according to the AmEx metric
-- Approach: per-customer aggregations + LightGBM optimized with custom AmEx metric
-- Experimentation: Databricks + MLflow for tracking and model registry
-- Highlights: scalable feature build (PySpark), clear CV design, readable code
+**At a glance**
+- **Objective:** Rank customers by default risk according to the AmEx metric.
+- **Approach:** Per-customer aggregations + LightGBM optimized with custom AmEx metric.
+- **Experimentation:** Databricks + MLflow for tracking and model registry.
+- **Code:** [GitHub Repository](https://github.com/ABHIRAM1234/amex-default-prediction)
+- **Highlights:** Scalable feature build (PySpark), clear CV design, readable code.
 
 ---
 
@@ -36,6 +40,20 @@ At a glance
 Goal: Predict whether a customer will default in the next period using historical monthly statements. Business impact is twofold: reduce credit losses (better risk ranking) and keep approval friction low (precision at the top deciles).
 
 Constraints: Class imbalance, cost of false negatives (missed risk), and need for stable ranking across cohorts.
+
+---
+
+## 01b. My Step-by-Step Thought Process
+
+**Step 1: Define the task and the metric** — The competition evaluates with a **custom AmEx metric** that rewards **ranking** (how well we order customers by default risk), not just binary accuracy. So the goal was to build a model that **ranks** customers correctly, with special attention to the top deciles (where approval/decline decisions are made). I also had to respect **temporal validity**: no future information in training or validation.
+
+**Step 2: Understand the data structure** — Each customer has **multiple monthly statements** (sequential rows). Raw rows cannot be fed directly into a single-row model, so I had to **aggregate** each customer's history into a fixed set of features (e.g. mean, std, min, max, last value per numeric column, and similar for categorical). I ensured **monotonic time order** per customer and handled missing values and data types (downcasting for memory).
+
+**Step 3: Feature engineering at scale** — I built **per-customer aggregations** over the statement history (e.g. mean, std, last, trend) for all relevant numeric and categorical columns. This step is compute-heavy on large data, so I used **PySpark** (or pandas with chunking) where needed for scalability. I avoided leakage by using only past statements for each customer.
+
+**Step 4: Model selection and tuning** — I chose **LightGBM** for its speed and strong performance on tabular data. I optimized hyperparameters with **Optuna** and **validated with a time-aware split** (e.g. last N months as validation) so the evaluation reflects real-world deployment. I optimized for the **AmEx metric** (or a proxy) in the objective.
+
+**Step 5: Experimentation and reproducibility** — I used **Databricks + MLflow** to log experiments, parameters, and metrics, and to register models. This keeps the project reproducible and interview-ready, with clear CV design and readable code.
 
 ---
 
@@ -278,6 +296,7 @@ mlflow.lightgbm.autolog(log_models=True)
 
 ## <a name="links"></a>07. Links
 
-- Kaggle competition: [AmEx Default Prediction](https://www.kaggle.com/competitions/amex-default-prediction)
+- **[GitHub Repository](https://github.com/ABHIRAM1234/amex-default-prediction)** — Code, feature pipeline, and model training for the AmEx default prediction project
+- **Kaggle competition:** [AmEx Default Prediction](https://www.kaggle.com/competitions/amex-default-prediction)
 
 

@@ -19,6 +19,9 @@ tags: [NLP, Deep Learning, GRU, GloVe, Paragram, Text Classification, Kaggle, Py
 
 ## <a name="project-overview"></a>00. Project Overview
 
+**What this project is (in plain English):**  
+I built a **text classifier** that predicts whether a **Quora question** is **sincere** (genuinely asking for information) or **insincere** (loaded, rhetorical, or intended to make a statement rather than seek an answer). The business goal is content moderation at scale: Quora has millions of questions, and manual review doesn't scale. The technical challenge is that only ~6% of questions are insincere (severe class imbalance) and the difference is often subtle—sarcasm, loaded language, or rhetorical framing. I started with a **TF-IDF baseline**, then moved to **CNN/LSTM** and finally a **Bi-directional GRU** with **pre-trained GloVe and Paragram embeddings**, using **4-fold cross-validation** and **cyclical learning rates** to reach a **0.705 F1-score** (top 15% of 4,000+ competitors). I also explored optional **BERT fine-tuning** and an optional **FastAPI** microservice for real-time inference.
+
 **🏆 Competition Achievement**: Top 15% performance in one of Kaggle's most challenging NLP competitions with 4,000+ participants
 
 In the Quora Insincere Questions Classification competition, I tackled the challenge of identifying insincere questions on Quora's platform—a critical business problem affecting user experience and platform integrity. The goal was to build a production-ready model that could distinguish between genuine questions and those that are insincere, such as loaded questions, rhetorical questions, or questions intended to make a statement rather than seek information.

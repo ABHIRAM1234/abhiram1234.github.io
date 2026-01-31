@@ -22,11 +22,16 @@ tags: [Machine Learning, Data Science, Classification, Python, Geospatial Analys
 
 ## <a name="project-overview"></a>00. Project Overview
 
+**What this project is (in plain English):**  
+I built a **machine learning system** that **predicts where and when wildfires are likely to occur** in Southern California. The goal is to support early warning and resource allocation: if we can identify high-risk conditions (weather, vegetation, topography, past fire activity), emergency responders and policymakers can act before fires start or spread. I combined **satellite data** (NASA FIRMS for fire detections and locations), **weather data** (Open-Meteo: temperature, humidity, wind, precipitation), and **environmental variables** (e.g. vegetation, topography) into a single dataset, then engineered features and trained **ensemble models** (LightGBM, XGBoost) to predict wildfire occurrence. The model achieves **AUC-ROC 0.94** and **85% accuracy** on over 113,000 instances (2020–2024). I approached the problem step by step: (1) define the prediction task and evaluation metric, (2) integrate and clean multi-source data, (3) engineer spatial and temporal features, (4) train and tune ensemble models with proper validation, and (5) interpret results and document limitations for someone who knows nothing about the project.
+
 **🔥 Mission-Critical Application**: Developed a production-ready wildfire prediction system addressing a $50B+ annual economic impact problem
 
 I developed a comprehensive machine learning system to predict wildfire occurrences in Southern California using satellite imagery, meteorological data, and environmental variables. This project demonstrates my ability to tackle complex environmental challenges through advanced data science techniques, combining geospatial analysis, time-series forecasting, and ensemble machine learning methods.
 
 **📊 Scale & Performance**: The system analyzes over 113,000 instances of wildfire and non-wildfire events from 2020 to 2024, processing data from NASA's FIRMS API and Open-Meteo to identify critical risk factors. Using ensemble methods including **LightGBM** and **XGBoost**, the model achieves an **AUC-ROC score of 0.94** and **85% accuracy**, providing actionable insights for wildfire prevention and emergency response.
+
+**Code:** [GitHub Repository](https://github.com/ABHIRAM1234/wildfire-prediction)
 
 **💼 Business Impact**: This system addresses California's $50B+ annual wildfire economic impact, with potential to save $2B+ annually through early warning systems and improved resource allocation.
 

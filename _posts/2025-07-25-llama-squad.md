@@ -8,21 +8,28 @@ tags: [LLM, Fine-Tuning, PyTorch, QLoRA, MLOps, NLP]
 # Table of Contents
 - [00. Project Overview](#overview-main)
 - [01. The Problem: Hallucination in Enterprise AI](#problem)
-- [02. The Solution: Specialization with QLoRA on a Rigorous Benchmark](#solution)
-- [03. My Approach & Key Technical Decisions](#approach)
-- [04. Quantifiable Results & Impact](#results)
-- [05. Conclusion & Key Takeaways](#conclusion)
-- [06. Explore the Project](#repo-link)
+- [02. Key Concepts: SQuAD 2.0, QLoRA, and Extractive QA](#concepts)
+- [03. My Step-by-Step Thought Process](#thought-process)
+- [04. The Solution: Specialization with QLoRA on a Rigorous Benchmark](#solution)
+- [05. My Approach & Key Technical Decisions](#approach)
+- [06. Quantifiable Results & Impact](#results)
+- [07. Conclusion & Key Takeaways](#conclusion)
+- [08. Explore the Project](#repo-link)
 
 ___
 
 ### <a name="overview-main"></a> 00. Project Overview
+
+**What this project is (in plain English):**  
+I took a **general-purpose large language model** (Meta’s Llama 2, 7B parameters) and **specialized it** for a very specific task: **extractive question answering**—given a passage of text and a question, either **copy the exact answer span from the passage** or **say “no answer”** if the passage doesn’t contain the answer. The goal was not only to improve accuracy when an answer exists, but to **dramatically reduce hallucination**: the model must learn to **abstain** when it doesn’t know, instead of inventing plausible-sounding but wrong answers. I used **QLoRA** (memory-efficient fine-tuning) so the whole process runs on a **single consumer GPU**, and a **custom training strategy** (masked loss on only the answer tokens) so the model learns the task without forgetting its general abilities.
 
 **🤖 Enterprise AI Innovation**: Developed production-ready LLM specialization system addressing $50B+ enterprise AI market opportunity
 
 This project demonstrates an end-to-end workflow for specializing a general-purpose foundation model (Meta's Llama 2 & 3) for the high-stakes, extractive Question-Answering task on the SQuAD 2.0 benchmark. By leveraging memory-efficient fine-tuning (QLoRA) and a custom training strategy in PyTorch, I developed a 7B-parameter model that not only achieved a **~300% performance lift over its baseline** but also dramatically reduced model hallucination, a critical requirement for deploying reliable AI in enterprise environments.
 
 **💼 Business Impact**: This system addresses the $50B+ enterprise AI market by solving the critical hallucination problem, enabling reliable AI deployment in mission-critical applications like customer support, legal research, and medical diagnosis.
+
+**Code:** [GitHub Repository](https://github.com/ABHIRAM1234/llama-squad)
 
 ___
 
@@ -34,7 +41,46 @@ General-purpose Large Language Models (LLMs) like Llama or GPT are incredibly po
 
 ___
 
-### <a name="solution"></a> 02. The Solution: Specialization with QLoRA on a Rigorous Benchmark
+### <a name="concepts"></a> 02. Key Concepts: SQuAD 2.0, QLoRA, and Extractive QA
+
+**SQuAD 2.0 (Stanford Question Answering Dataset)**  
+A benchmark for **reading comprehension**: each example has a **context** (a passage), a **question**, and either an **answer span** (start/end in the context) or **no answer**. The model must either extract the exact span or output “unanswerable.” SQuAD 2.0 includes **tens of thousands of unanswerable questions**, so it’s the standard way to measure whether a model **abstains** instead of hallucinating. I chose it because it directly tests “answer only from the passage; if nothing fits, say so.”
+
+**Extractive QA**  
+The model is not allowed to paraphrase or generate free-form text—it must **copy** the answer verbatim from the context or say “no answer.” This is stricter than generative QA and easier to evaluate (exact match, F1 on tokens). It’s also what many enterprise use cases need: answers grounded in a specific document or knowledge base.
+
+**QLoRA (Quantized Low-Rank Adaptation)**  
+Fine-tuning a 7B-parameter model in full precision would require many GPUs. **QLoRA** quantizes the base model to **4-bit** (using `bitsandbytes`) and then trains only **low-rank adapter** weights, so the memory footprint is small enough to run on a **single consumer GPU**. The result is a specialized model without needing a cluster—critical for cost and accessibility.
+
+**Masked causal language modeling**  
+During training, we only compute **loss on the tokens that form the answer** (e.g. the JSON output). All other tokens (system prompt, context, question) are **masked** (e.g. label = -100 in PyTorch) so the model doesn’t “learn” to change them. This teaches the model to **focus on producing the correct answer format** and to say “unanswerable” when appropriate, while **preserving** its general language ability (reducing catastrophic forgetting).
+
+___
+
+### <a name="thought-process"></a> 03. My Step-by-Step Thought Process
+
+I approached the project as: define the reliability problem → choose a benchmark that tests it → pick a model and a feasible way to fine-tune it → design the training objective → evaluate rigorously.
+
+---
+
+**Step 1: Define the reliability problem**  
+I started from the business need: **enterprise QA systems must not hallucinate.** When the answer isn’t in the document, the model must say “I don’t know” instead of making something up. So the goal was not only “answer correctly when the answer exists” but “**abstain correctly when it doesn’t**.” That led me to look for benchmarks that explicitly include unanswerable questions.
+
+**Step 2: Choose a benchmark that tests abstention**  
+I chose **SQuAD 2.0** because it has a large number of **unanswerable** questions alongside answerable ones. That way I could measure both (1) exact match when the answer exists and (2) correct abstention when it doesn’t. No other standard benchmark stresses “don’t hallucinate” as clearly for extractive QA.
+
+**Step 3: Pick a model and a feasible way to fine-tune it**  
+I wanted an **open-source, capable base model** (Llama 2, 7B) so the result is reproducible and deployable. Full fine-tuning would require more GPU memory than I had, so I used **QLoRA**: 4-bit quantization + low-rank adapters. That let me run the entire fine-tuning on a **single consumer GPU**, which is important for cost and for others to replicate.
+
+**Step 4: Design the training objective so the model learns “answer or abstain”**  
+I formatted each example as a prompt (system instruction + context + question) and a target (JSON with either the extracted span or “unanswerable”). The key was **masked loss**: only the **answer tokens** get a loss; the rest are masked. That way the model learns to generate the correct output format and to say “unanswerable” when appropriate, without overwriting its general reasoning on the prompt tokens.
+
+**Step 5: Evaluate rigorously and compare to baseline and larger models**  
+I evaluated on the SQuAD 2.0 validation set: **Exact Match** (and F1) for answerable questions, and **accuracy on unanswerable questions** (did the model abstain?). I compared to (1) the **base Llama 2** (no fine-tuning), (2) **larger Llama 2 70B**, and (3) **GPT-4** where applicable. The specialized 7B model beat the base by a large margin and matched or exceeded much larger models on this specific task, while running on one GPU.
+
+___
+
+### <a name="solution"></a> 04. The Solution: Specialization with QLoRA on a Rigorous Benchmark
 
 The goal was to specialize a compact, open-source model (Llama 2, 7B) to perform extractive QA with high fidelity. The **SQuAD 2.0 dataset** was chosen as the training and evaluation benchmark specifically because it contains over 50,000 "unanswerable" questions, making it the industry standard for testing a model's ability to avoid hallucination. The project involved fine-tuning the model to adhere to two strict rules:
 1.  If an answer exists in the context, extract it verbatim.
@@ -42,7 +88,7 @@ The goal was to specialize a compact, open-source model (Llama 2, 7B) to perform
 
 ___
 
-### <a name="approach"></a> 03. My Approach & Key Technical Decisions
+### <a name="approach"></a> 05. My Approach & Key Technical Decisions
 
 To achieve this, I engineered a complete training and evaluation pipeline with several key technical components:
 
@@ -57,7 +103,7 @@ To achieve this, I engineered a complete training and evaluation pipeline with s
 
 ___
 
-### <a name="results"></a> 04. Quantifiable Results & Impact
+### <a name="results"></a> 06. Quantifiable Results & Impact
 
 The fine-tuned model was rigorously evaluated against the SQuAD 2.0 validation set, showing dramatic improvements over the baseline and surpassing much larger, general-purpose models.
 
@@ -68,13 +114,13 @@ The fine-tuned model was rigorously evaluated against the SQuAD 2.0 validation s
 
 ___
 
-### <a name="conclusion"></a> 05. Conclusion & Key Takeaways
+### <a name="conclusion"></a> 07. Conclusion & Key Takeaways
 
 This project successfully demonstrates that by combining modern, memory-efficient fine-tuning techniques with a targeted training strategy, a compact, open-source LLM can be specialized to outperform even massive, general-purpose models on specific enterprise tasks. More importantly, it proves that a model can be explicitly trained for reliability and honesty, overcoming the critical issue of hallucination and making it a viable candidate for production systems.
 
 ___
 
-### <a name="repo-link"></a> 06. Explore the Project
+### <a name="repo-link"></a> 08. Explore the Project
 
 ## 🚀 Why This Project Matters to Recruiters
 

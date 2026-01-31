@@ -21,6 +21,9 @@ tags: [Tableau, Data Visualization, Geospatial Analytics, Real-Time Data, USGS A
 
 ## <a name="project-overview"></a>00. Project Overview
 
+**What this project is (in plain English):**  
+I built an **interactive, real-time earthquake tracking dashboard** using **Tableau** that shows **global seismic activity** on a map and in charts. The data comes from the **USGS Earthquake API** (updated regularly). The goal is to turn raw earthquake data (magnitude, depth, location, time) into **actionable insights** for emergency responders, researchers, insurers, and the public—so they can see where and when earthquakes happen, filter by magnitude or region, and understand patterns over time. I designed the dashboard for **usability**: clear filters, intuitive maps, and multi-dimensional views (magnitude, depth, location, time) so that someone who knows nothing about the project can explore the data and answer questions like "Where were the strongest earthquakes last month?" or "How does activity vary by region?"
+
 **🌍 Global Impact Application**: Built a production-ready real-time earthquake monitoring system serving emergency responders worldwide
 
 I developed an interactive, real-time earthquake tracking dashboard using Tableau that provides comprehensive geospatial analytics of global seismic activity. This project demonstrates my ability to create production-ready data visualization solutions that transform complex geospatial data into actionable insights for emergency response, research, and public awareness.
@@ -29,7 +32,7 @@ I developed an interactive, real-time earthquake tracking dashboard using Tablea
 
 **⚡ Real-Time Performance**: System processes 50,000+ earthquake events annually with 5-minute update frequency, serving emergency responders, researchers, and the general public with critical seismic information.
 
-[**Live Dashboard**](https://public.tableau.com/views/DSIEarthquakeDashboard/DSIEarthquakeTracker?:embed=yes&:display_count=yes&:showVizHome=no)
+**Code:** [GitHub Repository](https://github.com/ABHIRAM1234/earthquake-dashboard) | [**Live Dashboard**](https://public.tableau.com/views/DSIEarthquakeDashboard/DSIEarthquakeTracker?:embed=yes&:display_count=yes&:showVizHome=no)
 
 ---
 
@@ -58,6 +61,17 @@ I designed a comprehensive dashboard that addresses these challenges through:
 2. **Real-Time Updates**: Live data integration from USGS API
 3. **Multi-Dimensional Analysis**: Magnitude, depth, location, and temporal views
 4. **User-Friendly Interface**: Accessible design for both technical and non-technical users
+
+### My Step-by-Step Thought Process
+**Step 1: Define the audience and the questions** — I started from who would use the dashboard (emergency responders, researchers, insurers, public) and what questions they need to answer (e.g. "Where were the strongest earthquakes last month?" "How does activity vary by region?" "Is there a pattern over time?"). That drove the choice of views: map, magnitude/depth filters, time-series, and region breakdowns.
+
+**Step 2: Choose the data source and refresh strategy** — I chose the **USGS Earthquake API** for real-time, global, and historical data. I designed the connection so the dashboard can refresh (e.g. every 5 minutes) and so someone who doesn't know the project can understand where the data comes from and how often it updates.
+
+**Step 3: Design the layout and interactions** — I laid out the dashboard so the **map** is central (geospatial view), with **filters** (magnitude, depth, date range, region) and **supporting charts** (temporal, distribution) that respond to those filters. I kept the interface simple so non-technical users can explore without training.
+
+**Step 4: Implement and validate** — I built the Tableau workbook, connected to the USGS API (or a cached extract for performance), and validated that filters and drill-downs work as intended. I documented the architecture (USGS → processing → Tableau → dashboard) so the project is reproducible.
+
+**Step 5: Document and share** — I documented key fields (magnitude, depth, location, time), the refresh strategy, and how to use the dashboard, so someone who doesn't know the project can understand the entire flow from data to insights.
 
 ---
 
@@ -238,6 +252,7 @@ I adopted a **user-centered design approach** that prioritizes:
 
 ## <a name="project-links"></a>09. Project Links
 
+- **[GitHub Repository](https://github.com/ABHIRAM1234/earthquake-dashboard)** — Code and documentation for the earthquake tracking dashboard
 - **[Live Dashboard](https://public.tableau.com/views/DSIEarthquakeDashboard/DSIEarthquakeTracker?:embed=yes&:display_count=yes&:showVizHome=no)**
 - **[USGS Earthquake API](https://earthquake.usgs.gov/fdsnws/event/1/)**
 - **[Tableau Public Profile](https://public.tableau.com/app/profile/abhiram)**
