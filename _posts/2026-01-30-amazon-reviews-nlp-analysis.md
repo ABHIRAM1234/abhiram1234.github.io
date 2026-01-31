@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Amazon Reviews NLP Analysis: Sentiment, Topics & LLM-Powered Recommendations"
-image: "/posts/classification-title-img.png"
+image: "/posts/streamlit-app-preview-img.png"
 tags: [NLP, Sentiment Analysis, Topic Modeling, Python, VADER, LDA, Streamlit, LangChain, Classification]
 ---
 
@@ -199,7 +199,6 @@ Part-04: Deep NLP text prep, sequence models, PyTorch pipelines. Part-05: Stream
 
 - **GitHub:** [ABHIRAM1234/amazon-reviews-nlp-analysis](https://github.com/ABHIRAM1234/amazon-reviews-nlp-analysis) — NLP analysis of Amazon Reviews with companion Streamlit app and LLM/AI-based recommendations
 - **Streamlit app:** [Amazon Reviews NLP Analysis & Predictions](https://amazon-reviews-nlp-analysis.streamlit.app/)
-- **Original project:** [jirvingphd/amazon-reviews-nlp-analysis](https://github.com/jirvingphd/amazon-reviews-nlp-analysis) (forked from)
 
 ---
 

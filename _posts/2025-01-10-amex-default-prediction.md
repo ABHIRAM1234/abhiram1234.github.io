@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "AmEx Default Prediction: End-to-End Risk Modeling With the AmEx Metric"
-image: "/posts/classification-title-img.png"
+image: "/posts/amex-img.png"
 tags: [Credit Risk, Machine Learning, Gradient Boosting, Feature Engineering, Optuna, LightGBM, Python]
 ---
 

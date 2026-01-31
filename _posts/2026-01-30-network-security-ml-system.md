@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Network Security ML System: MLOps for Malicious URL Detection"
-image: "/posts/classification-title-img.png"
+image: "/posts/network-security-img.png"
 tags: [MLOps, Network Security, Machine Learning, Python, FastAPI, Streamlit, Airflow, MLflow, Docker, AWS, CI/CD]
 ---
 
@@ -165,7 +165,6 @@ I **containerized** the app with **Docker**, stored images in **AWS ECR**, and r
 
 - **[GitHub Repository](https://github.com/ABHIRAM1234/Network-Security-ML-System)** — MLOps solution for malicious URL detection (Streamlit, FastAPI, Airflow, MLflow, Docker, AWS)
 - **[Streamlit live demo](https://network-security-system-mlops-6nshvkcv8cxrngosbdlrhb.streamlit.app/)** — Real-time single-URL prediction
-- **Original project:** [Neeraj876/Network-Security-ML-System](https://github.com/Neeraj876/Network-Security-ML-System) (forked from)
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Customer Segmentation RFM & CLV: Online Retail Analytics"
-image: "/posts/classification-title-img.png"
+image: "/posts/customer-segmentation-img.png"
 tags: [Analytics, Retail, RFM, Customer Lifetime Value, Clustering, Python, K-means, Segmentation]
 ---
 
