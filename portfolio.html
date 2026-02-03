@@ -1,0 +1,62 @@
+---
+layout: default
+---
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+    <div class="nav-container">
+        <a href="/portfolio.html" class="nav-link active">Portfolio</a>
+        <a href="/" class="nav-link">About</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-12 col-t-12">
+            <div class="row">
+                {% for post in site.posts %}
+                    {% include post-card.html %}
+                {% endfor %}
+            </div>
+            {% include pagination.html %}
+        </div>
+    </div>
+</div>
+
+<style>
+/* Navigation Styles */
+.nav-bar {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    padding: 15px 0;
+    margin-bottom: 30px;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #666;
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+.nav-link.active {
+    background-color: #007bff;
+    color: white;
+}
+</style>

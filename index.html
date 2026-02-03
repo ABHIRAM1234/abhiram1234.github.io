@@ -1,33 +1,112 @@
 ---
 layout: default
+title: About Me
 ---
 
 <!-- Navigation Bar -->
 <div class="nav-bar">
     <div class="nav-container">
-        <a href="/" class="nav-link active">Portfolio</a>
-        <a href="/about.html" class="nav-link">About</a>
+        <a href="/portfolio.html" class="nav-link">Portfolio</a>
+        <a href="/" class="nav-link active">About</a>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
-        <div class="col col-12 col-t-12">
-            <div class="row">
-                {% for post in paginator.posts %}
-                    {% include post-card.html %}
-                {% endfor %}
+        <div class="col col-12">
+            <div class="about-section">
+                <div class="about-content">
+                    <!-- Left Column - Profile Image -->
+                    <div class="about-image">
+                        <img src="/img/whatsapp-img.jpeg" alt="Abhiram M V" class="profile-image">
+                    </div>
+                    
+                    <!-- Right Column - Text Content -->
+                    <div class="about-text">
+                        <h1 class="about-title">About Me</h1>
+                        
+                        <div class="about-summary">
+                            <p>Data Scientist with 2 years of experience driving decision-making across retail, supply chain and ecommerce. Skilled in Python, SQL, time series forecasting, predictive modeling using machine learning, AWS and Tableau. I also help bridge AI, Analytics, and Automation for businesses!</p>
+                        </div>
+                        
+                        <div class="experience-section">
+                            <h2 class="section-title">Experience</h2>
+                            <ul class="experience-list">
+                                <li>
+                                    <div class="experience-item">
+                                        <div class="experience-date">May 2025 – Present</div>
+                                        <div class="experience-role">Data Science Intern @ConverSight</div>
+                                        <ul class="experience-details">
+                                            <li>Built product line cash flow forecasting model in <strong>Python</strong> using <strong>Prophet</strong>. Delivered insights into supply-chain levers driving trend breaks (shipping speed, selection changes, fees). Improved MAPE by <strong>724 bps</strong> over previous projections.</li>
+                                            <li>Developed an AI voice agent with FastAPI, Websockets, OpenAI streaming, and Google TTS/STT, handling 50+ concurrent vendor interactions in real-time and saving hundreds of procurement hours annually. Deployed as a service on Cloud Run.</li>
+                                            <li>Designed an <strong>AI workflow</strong> using <strong>LangChain</strong> and <strong>OpenAI</strong> tool calling to convert unstructured procurement voice transcripts into schema-validated JSON stored in <strong>PostgreSQL</strong>, eliminating <strong>8 hours/week</strong> of data entry.</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="experience-item">
+                                        <div class="experience-date">August 2022 – July 2024</div>
+                                        <div class="experience-role">Data Scientist @ConverSight</div>
+                                        <ul class="experience-details">
+                                            <li>Built an automated <strong>demand forecasting</strong> pipeline in <strong>Python (Prophet, ARIMA, Holt-Winters)</strong> and <strong>SQL</strong> for Asian food products (1M+ records). Optimized inventory and reduced stockouts, improving annual cash flow by <strong>\$2M</strong>.</li>
+                                            <li>Developed a <strong>LightGBM</strong> classifier to predict user reorders (<strong>3M+</strong> transactions) using behavioral features (streaks, purchase frequency) with <strong>0.40 F1</strong> score, optimizing cart recommendations, reducing time-to-order and increasing basket size</li>
+                                            <li>Optimized <strong>forecasting</strong> model for fringe items’ demand (<strong>84%</strong> of selection) using <strong>MLP</strong> Class Probability Estimation and <strong>Quantile Regression</strong> using <strong>Scikit-learn</strong>, improving P90 Quantile Loss by <strong>1737 bps</strong></li>
+                                            <li>Diagnosed bottlenecks in manufacturing plants by pulling <strong>SQL Server</strong> data and analyzing it with <strong>Python</strong> and <strong>Excel</strong> (VBA, Macros). Built <strong>Tableau</strong> dashboards to track KPIs (throughput, cycle time), improving efficiency by <strong>12%</strong></li>
+                                            <li>Architected a <strong>RAG</strong> system using <strong>Qdrant</strong> Vector DB and <strong>OpenAI API</strong> with <strong>Sentence Transformer</strong> embeddings. Implemented recursive chunking, hybrid search, and cohere reranking, increasing accuracy by <strong>20%</strong> over baseline</li>
+                                            <li>Collaborated with engineering and DevOps to productionize <strong>ML</strong> solutions in <strong>AWS SageMaker</strong>, improving deployment cycles and meeting the SLA of <strong>99.99%</strong> availability</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="experience-item">
+                                        <div class="experience-date">January 2022 – July 2022</div>
+                                        <div class="experience-role">Data Analyst @Cognizant Technology Solutions</div>
+                                        <ul class="experience-details">
+                                            <li>Developed an <strong>ETL</strong> pipeline on <strong>Cloudera Hadoop</strong> and a <strong>PySpark XGBRegressor</strong> pipeline to predict <strong>lead time</strong> for stock items, improving the accuracy of the <strong>Estimated Delivery Date (EDD)</strong> by <strong>30%</strong> and <strong>NPS</strong> by <strong>50bps</strong></li>
+                                            <li>Constructed <strong>Tableau</strong> dashboards using <strong>LOD expressions and parameters</strong> to visualize <strong>model drift</strong> and delivery <strong>KPIs</strong> (On-Time Delivery (OTD), SLA breaches), cutting bottleneck detection time by <strong>20%</strong></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="education-section">
+                            <h2 class="section-title">Education</h2>
+                            <ul class="education-list">
+                                <li>
+                                    <div class="education-item">
+                                        <div class="education-date">2024 - 2026</div>
+                                        <div class="education-degree">Master of Science in Data Science</div>
+                                        <div class="education-school">University of Colorado Boulder</div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="education-item">
+                                        <div class="education-date">2018 - 2022</div>
+                                        <div class="education-degree">Bachelor of Technology in Computer Science</div>
+                                        <div class="education-school">Dayananda Sagar University</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            {% include pagination.html %}
         </div>
     </div>
 </div>
 
 <style>
+/* Override theme styles */
+body {
+    background-color: #f8f9fa !important;
+    color: #333 !important;
+}
+
 /* Navigation Styles */
 .nav-bar {
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #e9ecef;
+    background-color: #f8f9fa !important;
+    border-bottom: 1px solid #e9ecef !important;
     padding: 15px 0;
     margin-bottom: 30px;
 }
@@ -41,8 +120,8 @@ layout: default
 }
 
 .nav-link {
-    text-decoration: none;
-    color: #666;
+    text-decoration: none !important;
+    color: #666 !important;
     font-weight: 500;
     font-size: 1.1rem;
     padding: 8px 16px;
@@ -51,12 +130,124 @@ layout: default
 }
 
 .nav-link:hover {
-    background-color: #e9ecef;
-    color: #333;
+    background-color: #e9ecef !important;
+    color: #333 !important;
 }
 
 .nav-link.active {
-    background-color: #007bff;
-    color: white;
+    background-color: #007bff !important;
+    color: white !important;
+}
+
+.about-section {
+    padding: 40px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-content {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+.about-image {
+    flex: 0 0 400px;
+}
+
+.profile-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.about-text {
+    flex: 1;
+    padding-top: 20px;
+}
+
+.about-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    color: #333 !important;
+}
+
+.about-summary {
+    margin-bottom: 40px;
+}
+
+.about-summary p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #555 !important;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-decoration: underline;
+    color: #333 !important;
+}
+
+.experience-list,
+.education-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.experience-item,
+.education-item {
+    margin-bottom: 25px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.experience-date,
+.education-date {
+    font-weight: 600;
+    color: #666 !important;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.experience-role,
+.education-degree {
+    font-weight: 600;
+    color: #333 !important;
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+}
+
+.education-school {
+    color: #666 !important;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .about-image {
+        flex: none;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .about-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
 }
 </style>
