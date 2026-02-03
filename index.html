@@ -48,7 +48,7 @@ title: About Me
                                         <div class="experience-date">August 2022 – July 2024</div>
                                         <div class="experience-role">Data Scientist @ConverSight</div>
                                         <ul class="experience-details">
-                                            <li>Built an automated <strong>demand forecasting</strong> pipeline in <strong>Python (Prophet, ARIMA, Holt-Winters)</strong> and <strong>SQL</strong> for Asian food products (1M+ records). Optimized inventory and reduced stockouts, improving annual cash flow by <strong>\$2M</strong>.</li>
+                                            <li>Built an automated <strong>demand forecasting</strong> pipeline in <strong>Python (Prophet, ARIMA, Holt-Winters)</strong> and <strong>SQL</strong> for Asian food products (1M+ records). Optimized inventory and reduced stockouts, improving annual cash flow by <strong>$2M</strong>.</li>
                                             <li>Developed a <strong>LightGBM</strong> classifier to predict user reorders (<strong>3M+</strong> transactions) using behavioral features (streaks, purchase frequency) with <strong>0.40 F1</strong> score, optimizing cart recommendations, reducing time-to-order and increasing basket size</li>
                                             <li>Optimized <strong>forecasting</strong> model for fringe items’ demand (<strong>84%</strong> of selection) using <strong>MLP</strong> Class Probability Estimation and <strong>Quantile Regression</strong> using <strong>Scikit-learn</strong>, improving P90 Quantile Loss by <strong>1737 bps</strong></li>
                                             <li>Diagnosed bottlenecks in manufacturing plants by pulling <strong>SQL Server</strong> data and analyzing it with <strong>Python</strong> and <strong>Excel</strong> (VBA, Macros). Built <strong>Tableau</strong> dashboards to track KPIs (throughput, cycle time), improving efficiency by <strong>12%</strong></li>
@@ -83,7 +83,7 @@ title: About Me
                                 <li>
                                     <div class="education-item">
                                         <div class="education-date">2018 - 2022</div>
-                                        <div class="education-degree">Bachelor of Technology in Computer Science</div>
+                                        <div class="education-degree">Bachelor of Technology in Electronics and Communication Engineering</div>
                                         <div class="education-school">Dayananda Sagar University</div>
                                     </div>
                                 </li>
@@ -180,10 +180,17 @@ body {
 }
 
 .about-summary p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: 1.25rem; /* Increased from 1.1rem */
+    line-height: 1.8;   /* Increased from 1.6 for better readability */
     margin-bottom: 15px;
     color: #555 !important;
+}
+
+.experience-details li {
+    font-size: 1.15rem; /* Makes the bullet points larger */
+    line-height: 1.6;
+    margin-bottom: 8px; /* Adds space between bullets */
+    color: #444;
 }
 
 .section-title {
@@ -212,16 +219,16 @@ body {
 .education-date {
     font-weight: 600;
     color: #666 !important;
-    font-size: 0.9rem;
+    font-size: 1rem;         /* Increased from 0.9rem */
     margin-bottom: 5px;
 }
 
 .experience-role,
 .education-degree {
-    font-weight: 600;
+    font-weight: 700;        /* Bolder */
     color: #333 !important;
-    font-size: 1.1rem;
-    margin-bottom: 3px;
+    font-size: 1.3rem;       /* Increased from 1.1rem */
+    margin-bottom: 8px;      /* More space below the role title */
 }
 
 .education-school {
