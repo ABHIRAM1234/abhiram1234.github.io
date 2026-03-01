@@ -3,6 +3,7 @@ layout: post
 title: "Walmart Sales Forecasting (M5): End‑to‑End From Data to Deployment"
 image: "/posts/m5-forecasting-title-image.png"
 tags: [Machine Learning, Time Series, Forecasting, LightGBM, Python, Pandas, MLOps, AWS, SageMaker, QuickSight]
+summary: "End-to-end sales forecasting system for 30K+ Walmart SKUs using LightGBM on 46M+ rows, achieving top-tier WRMSSE 0.51. Deployed on AWS SageMaker with QuickSight dashboards."
 ---
 
 # Table of Contents

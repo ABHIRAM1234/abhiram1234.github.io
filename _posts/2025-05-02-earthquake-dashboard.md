@@ -3,6 +3,7 @@ layout: post
 title: "Earthquake Tracking Dashboard: Real-Time Geospatial Analytics with Tableau"
 image: "/posts/tableau-map-image.png"
 tags: [Tableau, Data Visualization, Geospatial Analytics, Real-Time Data, USGS API, Interactive Dashboards, Business Intelligence]
+summary: "Real-time geospatial analytics dashboard built with Tableau, visualizing USGS earthquake data with interactive maps, filters, and KPI tracking."
 ---
 
 # Table of Contents

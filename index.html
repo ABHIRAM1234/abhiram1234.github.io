@@ -1,260 +1,1019 @@
 ---
-layout: default
-title: About Me
+layout: null
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhiram M V | Data Scientist</title>
+    <meta name="description" content="Data Scientist with 2+ years of experience in ML, forecasting, NLP, and AI systems. MS Data Science at CU Boulder.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0b0b0f;
+            --bg-secondary: #111118;
+            --bg-card: #16161f;
+            --bg-card-hover: #1c1c28;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --accent-glow: rgba(59, 130, 246, 0.15);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-hover: rgba(59, 130, 246, 0.3);
+            --tag-bg: rgba(59, 130, 246, 0.1);
+            --tag-text: #93c5fd;
+            --nav-height: 70px;
+            --section-padding: 100px 0;
+            --max-width: 1100px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-<!-- Navigation Bar -->
-<div class="nav-bar">
-    <div class="nav-container">
-        <a href="/portfolio.html" class="nav-link">Portfolio</a>
-        <a href="/" class="nav-link active">About</a>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-height);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent-light); text-decoration: none; transition: color var(--transition); }
+        a:hover { color: var(--accent); }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 48px;
+        }
+
+        /* ============ NAVIGATION ============ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: rgba(11, 11, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: background var(--transition);
+        }
+
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-links a.active {
+            color: var(--accent-light);
+        }
+
+        .nav-resume {
+            background: var(--accent) !important;
+            color: #fff !important;
+            font-weight: 600 !important;
+            padding: 8px 20px !important;
+            border-radius: 8px !important;
+        }
+
+        .nav-resume:hover {
+            background: var(--accent-light) !important;
+            transform: translateY(-1px);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--nav-height);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--tag-bg);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--tag-text);
+            margin-bottom: 32px;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero-greeting {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .hero-name {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .hero-name .highlight { color: var(--accent); }
+
+        .hero-title {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 40px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-light);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        /* ============ ABOUT ============ */
+        .about { padding: var(--section-padding); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        .about-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 800px;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: all var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .skills-section { margin-top: 48px; }
+
+        .skills-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            padding: 8px 18px;
+            background: var(--tag-bg);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--tag-text);
+            transition: all var(--transition);
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent);
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        /* ============ EXPERIENCE ============ */
+        .experience { padding: var(--section-padding); background: var(--bg-secondary); }
+
+        .exp-timeline { display: flex; flex-direction: column; gap: 24px; }
+
+        .exp-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            transition: all var(--transition);
+            position: relative;
+        }
+
+        .exp-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .exp-role {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .exp-date {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--accent-light);
+            background: var(--tag-bg);
+            padding: 4px 14px;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
+        .exp-company {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .exp-bullets {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exp-bullets li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .exp-bullets li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        /* ============ PROJECTS ============ */
+        .projects { padding: var(--section-padding); }
+
+        .projects-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: -36px;
+            margin-bottom: 48px;
+            max-width: 600px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px;
+            transition: all var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .project-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--tag-bg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        .project-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .project-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .project-tag {
+            padding: 4px 12px;
+            background: rgba(148, 163, 184, 0.08);
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            transition: all var(--transition);
+        }
+
+        .project-link:hover {
+            color: var(--accent);
+            gap: 10px;
+        }
+
+        /* ============ EDUCATION ============ */
+        .education { padding: var(--section-padding); background: var(--bg-secondary); }
+
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .edu-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px;
+            transition: all var(--transition);
+        }
+
+        .edu-card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .edu-school {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .edu-degree {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .edu-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ============ CONTACT ============ */
+        .contact { padding: var(--section-padding); }
+
+        .contact-inner {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-text {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            line-height: 1.8;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all var(--transition);
+        }
+
+        .contact-chip:hover {
+            border-color: var(--border-hover);
+            color: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .contact-chip i { color: var(--accent); font-size: 1rem; }
+
+        .contact-socials {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            transition: all var(--transition);
+        }
+
+        .social-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            padding: 32px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ============ ANIMATIONS ============ */
+        [data-animate] {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        [data-animate].visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 900px) {
+            .projects-grid { grid-template-columns: 1fr; }
+            .edu-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --section-padding: 64px 0; }
+
+            .nav-links {
+                position: fixed;
+                top: var(--nav-height);
+                left: 0;
+                right: 0;
+                background: var(--bg-primary);
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 16px 24px;
+                gap: 4px;
+                transform: translateY(-120%);
+                transition: transform var(--transition);
+                z-index: 999;
+            }
+
+            .nav-links.open { transform: translateY(0); }
+            .nav-links a { width: 100%; text-align: left; padding: 12px 16px; }
+            .nav-toggle { display: block; }
+
+            .hero-name { font-size: 2.2rem; }
+            .stats-row { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+            .stat-card { padding: 20px 12px; }
+            .stat-number { font-size: 1.6rem; }
+
+            .exp-header { flex-direction: column; }
+            .section-title { font-size: 1.6rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-ctas { flex-direction: column; }
+            .btn { justify-content: center; }
+            .contact-links { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============ NAVIGATION ============ -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">Abhiram<span>.</span></a>
+        <div class="nav-links" id="navLinks">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#contact">Contact</a>
+            <a href="/docs/resume.docx" class="nav-resume">Resume</a>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
-</div>
+</nav>
 
-<div class="container">
-    <div class="row">
-        <div class="col col-12">
-            <div class="about-section">
-                <div class="about-content">
-                    <!-- Left Column - Profile Image -->
-                    <div class="about-image">
-                        <img src="/img/whatsapp-img.jpeg" alt="Abhiram M V" class="profile-image">
-                    </div>
-                    
-                    <!-- Right Column - Text Content -->
-                    <div class="about-text">
-                        <h1 class="about-title">About Me</h1>
-                        
-                        <div class="about-summary">
-                            <p>Data Scientist with 2 years of experience driving decision-making across retail, supply chain and ecommerce. Skilled in Python, SQL, time series forecasting, predictive modeling using machine learning, AWS and Tableau. I also help bridge AI, Analytics, and Automation for businesses!</p>
-                        </div>
-                        
-                        <div class="experience-section">
-                            <h2 class="section-title">Experience</h2>
-                            <ul class="experience-list">
-                                <li>
-                                    <div class="experience-item">
-                                        <div class="experience-date">May 2025 – Present</div>
-                                        <div class="experience-role">Data Science Intern @ConverSight</div>
-                                        <ul class="experience-details">
-                                            <li>Built product line cash flow forecasting model in <strong>Python</strong> using <strong>Prophet</strong>. Delivered insights into supply-chain levers driving trend breaks (shipping speed, selection changes, fees). Improved MAPE by <strong>724 bps</strong> over previous projections.</li>
-                                            <li>Developed an AI voice agent with FastAPI, Websockets, OpenAI streaming, and Google TTS/STT, handling 50+ concurrent vendor interactions in real-time and saving hundreds of procurement hours annually. Deployed as a service on Cloud Run.</li>
-                                            <li>Designed an <strong>AI workflow</strong> using <strong>LangChain</strong> and <strong>OpenAI</strong> tool calling to convert unstructured procurement voice transcripts into schema-validated JSON stored in <strong>PostgreSQL</strong>, eliminating <strong>8 hours/week</strong> of data entry.</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="experience-item">
-                                        <div class="experience-date">August 2022 – July 2024</div>
-                                        <div class="experience-role">Data Scientist @ConverSight</div>
-                                        <ul class="experience-details">
-                                            <li>Built an automated <strong>demand forecasting</strong> pipeline in <strong>Python (Prophet, ARIMA, Holt-Winters)</strong> and <strong>SQL</strong> for Asian food products (1M+ records). Optimized inventory and reduced stockouts, improving annual cash flow by <strong>$2M</strong>.</li>
-                                            <li>Developed a <strong>LightGBM</strong> classifier to predict user reorders (<strong>3M+</strong> transactions) using behavioral features (streaks, purchase frequency) with <strong>0.40 F1</strong> score, optimizing cart recommendations, reducing time-to-order and increasing basket size</li>
-                                            <li>Optimized <strong>forecasting</strong> model for fringe items’ demand (<strong>84%</strong> of selection) using <strong>MLP</strong> Class Probability Estimation and <strong>Quantile Regression</strong> using <strong>Scikit-learn</strong>, improving P90 Quantile Loss by <strong>1737 bps</strong></li>
-                                            <li>Diagnosed bottlenecks in manufacturing plants by pulling <strong>SQL Server</strong> data and analyzing it with <strong>Python</strong> and <strong>Excel</strong> (VBA, Macros). Built <strong>Tableau</strong> dashboards to track KPIs (throughput, cycle time), improving efficiency by <strong>12%</strong></li>
-                                            <li>Architected a <strong>RAG</strong> system using <strong>Qdrant</strong> Vector DB and <strong>OpenAI API</strong> with <strong>Sentence Transformer</strong> embeddings. Implemented recursive chunking, hybrid search, and cohere reranking, increasing accuracy by <strong>20%</strong> over baseline</li>
-                                            <li>Collaborated with engineering and DevOps to productionize <strong>ML</strong> solutions in <strong>AWS SageMaker</strong>, improving deployment cycles and meeting the SLA of <strong>99.99%</strong> availability</li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="experience-item">
-                                        <div class="experience-date">January 2022 – July 2022</div>
-                                        <div class="experience-role">Data Analyst @Cognizant Technology Solutions</div>
-                                        <ul class="experience-details">
-                                            <li>Developed an <strong>ETL</strong> pipeline on <strong>Cloudera Hadoop</strong> and a <strong>PySpark XGBRegressor</strong> pipeline to predict <strong>lead time</strong> for stock items, improving the accuracy of the <strong>Estimated Delivery Date (EDD)</strong> by <strong>30%</strong> and <strong>NPS</strong> by <strong>50bps</strong></li>
-                                            <li>Constructed <strong>Tableau</strong> dashboards using <strong>LOD expressions and parameters</strong> to visualize <strong>model drift</strong> and delivery <strong>KPIs</strong> (On-Time Delivery (OTD), SLA breaches), cutting bottleneck detection time by <strong>20%</strong></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <div class="education-section">
-                            <h2 class="section-title">Education</h2>
-                            <ul class="education-list">
-                                <li>
-                                    <div class="education-item">
-                                        <div class="education-date">2024 - 2026</div>
-                                        <div class="education-degree">Master of Science in Data Science</div>
-                                        <div class="education-school">University of Colorado Boulder</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="education-item">
-                                        <div class="education-date">2018 - 2022</div>
-                                        <div class="education-degree">Bachelor of Technology in Electronics and Communication Engineering</div>
-                                        <div class="education-school">Dayananda Sagar University</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+    <div class="container">
+        <div class="hero-content" data-animate>
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Open to new opportunities
+            </div>
+            <p class="hero-greeting">Hi, I'm</p>
+            <h1 class="hero-name">Abhiram <span class="highlight">M V.</span></h1>
+            <p class="hero-title">Data Scientist &amp; MS Candidate at CU Boulder</p>
+            <div class="hero-ctas">
+                <a href="#projects" class="btn btn-primary">
+                    View My Work <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="/docs/resume.docx" class="btn btn-outline">
+                    <i class="fas fa-download"></i> Download CV
+                </a>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<style>
-/* Override theme styles */
-body {
-    background-color: #f8f9fa !important;
-    color: #333 !important;
-}
+<!-- ============ ABOUT ============ -->
+<section class="about" id="about">
+    <div class="container">
+        <div class="about-grid" data-animate>
+            <div>
+                <span class="section-label">About Me</span>
+                <h2 class="section-title">Data Scientist & ML Engineer</h2>
+                <p class="about-text">
+                    Data Scientist with 2+ years of experience driving decision-making across retail, supply chain, and ecommerce. 
+                    Skilled in Python, SQL, time series forecasting, predictive modeling using machine learning, AWS, and Tableau. 
+                    I bridge AI, Analytics, and Automation to deliver measurable business impact — from demand forecasting pipelines 
+                    that improved cash flow by $2M to RAG systems and AI voice agents that save hundreds of hours annually.
+                </p>
+            </div>
+        </div>
 
-/* Navigation Styles */
-.nav-bar {
-    background-color: #f8f9fa !important;
-    border-bottom: 1px solid #e9ecef !important;
-    padding: 15px 0;
-    margin-bottom: 30px;
-}
+        <div class="stats-row" data-animate>
+            <div class="stat-card">
+                <div class="stat-number">2+</div>
+                <div class="stat-label">Years of Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12+</div>
+                <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">MS</div>
+                <div class="stat-label">Data Science, CU Boulder</div>
+            </div>
+        </div>
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    gap: 30px;
-    padding: 0 20px;
-}
+        <div class="skills-section" data-animate>
+            <div class="skills-label">Technical Skills</div>
+            <div class="skills-grid">
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">SQL</span>
+                <span class="skill-tag">Machine Learning</span>
+                <span class="skill-tag">Deep Learning</span>
+                <span class="skill-tag">NLP</span>
+                <span class="skill-tag">LLMs & RAG</span>
+                <span class="skill-tag">Time Series Forecasting</span>
+                <span class="skill-tag">LightGBM / XGBoost</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">LangChain</span>
+                <span class="skill-tag">AWS SageMaker</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">MLOps / CI-CD</span>
+                <span class="skill-tag">Tableau</span>
+                <span class="skill-tag">Streamlit</span>
+                <span class="skill-tag">FastAPI</span>
+            </div>
+        </div>
+    </div>
+</section>
 
-.nav-link {
-    text-decoration: none !important;
-    color: #666 !important;
-    font-weight: 500;
-    font-size: 1.1rem;
-    padding: 8px 16px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
+<!-- ============ EXPERIENCE ============ -->
+<section class="experience" id="experience">
+    <div class="container">
+        <span class="section-label" data-animate>Career</span>
+        <h2 class="section-title" data-animate>Work Experience</h2>
 
-.nav-link:hover {
-    background-color: #e9ecef !important;
-    color: #333 !important;
-}
+        <div class="exp-timeline">
+            <div class="exp-card" data-animate>
+                <div class="exp-header">
+                    <div class="exp-role">Data Science Intern</div>
+                    <span class="exp-date">May 2025 – Present</span>
+                </div>
+                <div class="exp-company">ConverSight</div>
+                <ul class="exp-bullets">
+                    <li>Built product line cash flow forecasting model in <strong>Python</strong> using <strong>Prophet</strong>. Delivered insights into supply-chain levers driving trend breaks. Improved MAPE by <strong>724 bps</strong> over previous projections.</li>
+                    <li>Developed an AI voice agent with FastAPI, Websockets, OpenAI streaming, and Google TTS/STT, handling <strong>50+ concurrent</strong> vendor interactions in real-time and saving hundreds of procurement hours annually.</li>
+                    <li>Designed an <strong>AI workflow</strong> using <strong>LangChain</strong> and <strong>OpenAI</strong> tool calling to convert unstructured procurement voice transcripts into schema-validated JSON stored in <strong>PostgreSQL</strong>, eliminating <strong>8 hours/week</strong> of data entry.</li>
+                </ul>
+            </div>
 
-.nav-link.active {
-    background-color: #007bff !important;
-    color: white !important;
-}
+            <div class="exp-card" data-animate>
+                <div class="exp-header">
+                    <div class="exp-role">Data Scientist</div>
+                    <span class="exp-date">Aug 2022 – Jul 2024</span>
+                </div>
+                <div class="exp-company">ConverSight</div>
+                <ul class="exp-bullets">
+                    <li>Built automated <strong>demand forecasting</strong> pipeline in <strong>Python (Prophet, ARIMA, Holt-Winters)</strong> and <strong>SQL</strong> for Asian food products (1M+ records). Improved annual cash flow by <strong>$2M</strong>.</li>
+                    <li>Developed a <strong>LightGBM</strong> classifier to predict user reorders (<strong>3M+</strong> transactions) using behavioral features with <strong>0.40 F1</strong> score, optimizing cart recommendations and increasing basket size.</li>
+                    <li>Optimized forecasting model for fringe items' demand (<strong>84%</strong> of selection) using <strong>MLP</strong> and <strong>Quantile Regression</strong>, improving P90 Quantile Loss by <strong>1737 bps</strong>.</li>
+                    <li>Architected a <strong>RAG</strong> system using <strong>Qdrant</strong> Vector DB and <strong>OpenAI API</strong> with recursive chunking, hybrid search, and cohere reranking, increasing accuracy by <strong>20%</strong>.</li>
+                    <li>Productionized <strong>ML</strong> solutions in <strong>AWS SageMaker</strong>, meeting SLA of <strong>99.99%</strong> availability.</li>
+                </ul>
+            </div>
 
-.about-section {
-    padding: 40px 0;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+            <div class="exp-card" data-animate>
+                <div class="exp-header">
+                    <div class="exp-role">Data Analyst</div>
+                    <span class="exp-date">Jan 2022 – Jul 2022</span>
+                </div>
+                <div class="exp-company">Cognizant Technology Solutions</div>
+                <ul class="exp-bullets">
+                    <li>Developed an <strong>ETL</strong> pipeline on <strong>Cloudera Hadoop</strong> and a <strong>PySpark XGBRegressor</strong> pipeline to predict lead time, improving EDD accuracy by <strong>30%</strong> and NPS by <strong>50 bps</strong>.</li>
+                    <li>Constructed <strong>Tableau</strong> dashboards using <strong>LOD expressions</strong> to visualize model drift and delivery KPIs, cutting bottleneck detection time by <strong>20%</strong>.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
 
-.about-content {
-    display: flex;
-    gap: 60px;
-    align-items: flex-start;
-}
+<!-- ============ PROJECTS ============ -->
+<section class="projects" id="projects">
+    <div class="container">
+        <span class="section-label" data-animate>Portfolio</span>
+        <h2 class="section-title" data-animate>Featured Projects</h2>
+        <p class="projects-subtitle" data-animate>
+            A selection of projects demonstrating end-to-end data science — from EDA to deployment.
+        </p>
 
-.about-image {
-    flex: 0 0 400px;
-}
+        <div class="projects-grid">
+            {% for post in site.posts %}
+            <div class="project-card" data-animate>
+                <div class="project-icon">
+                    {% if post.tags contains 'NLP' or post.tags contains 'LLM' %}
+                        <i class="fas fa-language"></i>
+                    {% elsif post.tags contains 'Forecasting' or post.tags contains 'Time Series' %}
+                        <i class="fas fa-chart-line"></i>
+                    {% elsif post.tags contains 'Recommender Systems' or post.tags contains 'Recommendation Systems' %}
+                        <i class="fas fa-thumbs-up"></i>
+                    {% elsif post.tags contains 'MLOps' or post.tags contains 'Docker' %}
+                        <i class="fas fa-gears"></i>
+                    {% elsif post.tags contains 'Tableau' or post.tags contains 'Data Visualization' %}
+                        <i class="fas fa-chart-pie"></i>
+                    {% elsif post.tags contains 'Classification' %}
+                        <i class="fas fa-shield-halved"></i>
+                    {% elsif post.tags contains 'Clustering' or post.tags contains 'Segmentation' %}
+                        <i class="fas fa-users"></i>
+                    {% elsif post.tags contains 'Credit Risk' %}
+                        <i class="fas fa-credit-card"></i>
+                    {% else %}
+                        <i class="fas fa-code"></i>
+                    {% endif %}
+                </div>
+                <h3 class="project-title">{{ post.title }}</h3>
+                <p class="project-description">{{ post.summary }}</p>
+                <div class="project-tags">
+                    {% for tag in post.tags limit:4 %}
+                    <span class="project-tag">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <div class="project-links">
+                    <a href="{{ post.url | prepend: site.baseurl }}" class="project-link">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                    {% if post.github_url %}
+                    <a href="{{ post.github_url }}" class="project-link" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> Code
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
-.profile-image {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
+<!-- ============ EDUCATION ============ -->
+<section class="education" id="education">
+    <div class="container">
+        <span class="section-label" data-animate>Education</span>
+        <h2 class="section-title" data-animate>Academic Background</h2>
 
-.about-text {
-    flex: 1;
-    padding-top: 20px;
-}
+        <div class="edu-grid">
+            <div class="edu-card" data-animate>
+                <div class="edu-school">University of Colorado, Boulder</div>
+                <div class="edu-degree">Master of Science, Data Science</div>
+                <div class="edu-date">Aug 2024 – May 2026</div>
+            </div>
+            <div class="edu-card" data-animate>
+                <div class="edu-school">Dayananda Sagar University</div>
+                <div class="edu-degree">B.Tech, Electronics & Communication Engineering</div>
+                <div class="edu-date">2018 – 2022</div>
+            </div>
+        </div>
+    </div>
+</section>
 
-.about-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 30px;
-    text-decoration: underline;
-    color: #333 !important;
-}
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+    <div class="container">
+        <div class="contact-inner" data-animate>
+            <span class="section-label">Get in Touch</span>
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-text">
+                I'm currently looking for new opportunities. Whether you have a question or just want to say hi, feel free to reach out!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:abhiram2000@gmail.com" class="contact-chip">
+                    <i class="fas fa-envelope"></i> abhiram2000@gmail.com
+                </a>
+                <span class="contact-chip">
+                    <i class="fas fa-location-dot"></i> Boulder, CO
+                </span>
+            </div>
+            <div class="contact-socials">
+                <a href="https://github.com/ABHIRAM1234" class="social-btn" target="_blank" rel="noopener" aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/abhiram-m-v-4a0413182/" class="social-btn" target="_blank" rel="noopener" aria-label="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
-.about-summary {
-    margin-bottom: 40px;
-}
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 Abhiram M V. Built with Jekyll & GitHub Pages.</p>
+    </div>
+</footer>
 
-.about-summary p {
-    font-size: 1.25rem; /* Increased from 1.1rem */
-    line-height: 1.8;   /* Increased from 1.6 for better readability */
-    margin-bottom: 15px;
-    color: #555 !important;
-}
+<!-- ============ SCRIPTS ============ -->
+<script>
+(function() {
+    const toggle = document.getElementById('navToggle');
+    const links = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+        links.classList.toggle('open');
+        const icon = toggle.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-xmark');
+    });
 
-.experience-details li {
-    font-size: 1.15rem; /* Makes the bullet points larger */
-    line-height: 1.6;
-    margin-bottom: 8px; /* Adds space between bullets */
-    color: #444;
-}
+    links.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            links.classList.remove('open');
+            const icon = toggle.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-xmark');
+        });
+    });
 
-.section-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-decoration: underline;
-    color: #333 !important;
-}
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-.experience-list,
-.education-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 
-.experience-item,
-.education-item {
-    margin-bottom: 25px;
-    padding: 15px 0;
-    border-bottom: 1px solid #eee;
-}
+    const sections = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
-.experience-date,
-.education-date {
-    font-weight: 600;
-    color: #666 !important;
-    font-size: 1rem;         /* Increased from 0.9rem */
-    margin-bottom: 5px;
-}
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const top = section.offsetTop - 100;
+            if (window.scrollY >= top) current = section.getAttribute('id');
+        });
+        navAnchors.forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+        });
+    });
+})();
+</script>
 
-.experience-role,
-.education-degree {
-    font-weight: 700;        /* Bolder */
-    color: #333 !important;
-    font-size: 1.3rem;       /* Increased from 1.1rem */
-    margin-bottom: 8px;      /* More space below the role title */
-}
-
-.education-school {
-    color: #666 !important;
-    font-size: 1rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-        gap: 30px;
-    }
-    
-    .about-image {
-        flex: none;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-    
-    .about-title {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 1.5rem;
-    }
-}
-</style>
+</body>
+</html>

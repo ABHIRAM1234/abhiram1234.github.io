@@ -3,6 +3,7 @@ layout: post
 title: "Amazon Reviews NLP Analysis: Sentiment, Topics & LLM-Powered Recommendations"
 image: "/posts/streamlit-app-preview-img.png"
 tags: [NLP, Sentiment Analysis, Topic Modeling, Python, VADER, LDA, Streamlit, LangChain, Classification]
+summary: "NLP pipeline analyzing Amazon product reviews with VADER sentiment, LDA topic modeling, and ML classification (~96% accuracy). Includes a Streamlit dashboard with LangChain-powered LLM recommendations."
 ---
 
 # Table of Contents

@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "LLaMA SQuAD: Specializing a Foundation Model for High-Stakes Question Answering"
-image: "/posts/llama_squad.png" 
+image: "/posts/llama_squad.png"
 tags: [LLM, Fine-Tuning, PyTorch, QLoRA, MLOps, NLP]
+summary: "Fine-tuned Meta's LLaMA 2 (7B) for extractive QA using QLoRA on a single GPU, achieving a 300% performance lift while dramatically reducing hallucination."
 ---
 
 # Table of Contents

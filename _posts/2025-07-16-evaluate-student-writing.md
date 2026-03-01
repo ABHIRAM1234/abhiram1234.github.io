@@ -3,6 +3,7 @@ layout: post
 title: "Feedback Prize: An End-to-End NLP Strategy for Text Segmentation"
 image: "/posts/evaluating-student-writing-title-image.png"
 tags: [Machine Learning, NLP, Python, PyTorch, Transformers, Deep Learning, Ensemble Methods, Kaggle]
+summary: "NLP text segmentation system using PyTorch Transformers and ensemble methods to identify argumentative discourse elements in student essays."
 ---
 
 ### Table of Contents

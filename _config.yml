@@ -1,4 +1,4 @@
-# Remote theme directory
+# Remote theme (still used for post detail pages)
 remote_theme: analytics-link/analytics-link.github.io
 
 plugins:
@@ -8,29 +8,29 @@ plugins:
 
 #-------------------------------
 # General Site Settings
-title: Abhiram
-description: "Hi I'm Abhiram, and I'm a Data Scientist.  My portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my Resume) by using the links below!"
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+title: Abhiram M V | Data Scientist
+description: "Data Scientist with 2+ years of experience in ML, forecasting, NLP, and AI systems. MS Data Science at CU Boulder."
+baseurl: ""
+url: ""
 
 #-------------------------------
 # About Section
-subtitle: Data Science <span style="color:#f58506"> Portfolio </span>
+subtitle: Data Science Portfolio
 location: "Boulder, CO"
 resume_url: /docs/resume.docx
 avatar_image: /img/profile_picture.JPG
 
 #-------------------------------
 # Contact links
-linkedln: "https://www.linkedin.com/in/abhiram-m-v-4a0413182/" # Add your linkedln handle
-github: "https://github.com/ABHIRAM1234"  # Add your github handle
+linkedin: "https://www.linkedin.com/in/abhiram-m-v-4a0413182/"
+github: "https://github.com/ABHIRAM1234"
 
 paginate: 6
 paginate_path: "/page/:num"
 
 sass:
   sass_dir: _sass
-  style: compressed # possible values: nested expanded compact compressed
+  style: compressed
 
 defaults:
   - scope:
@@ -40,15 +40,8 @@ defaults:
       read_time: true
       share: false
 
-
-#-------------------------------
-# Exclude from processing.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - about-standalone.html
+  - test-about.html
+  - README.md
 

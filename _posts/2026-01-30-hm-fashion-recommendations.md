@@ -3,6 +3,7 @@ layout: post
 title: "H&M Personalized Fashion Recommendations"
 image: "/posts/h&m-rec-sys-title-img.png"
 tags: [Recommender Systems, Machine Learning, Collaborative Filtering, Kaggle, Python, LightGBM, Deep Learning, Ensemble]
+summary: "Personalized fashion recommendation engine combining collaborative filtering, LightGBM ranking, and deep learning to predict customer purchases from 31M+ transactions."
 ---
 
 # Table of Contents

@@ -3,6 +3,7 @@ layout: post
 title: "Quora Insincere Questions Classification: Bi-directional GRU with Pre-trained Embeddings"
 image: "/posts/quora-prediction-title-img.png"
 tags: [NLP, Deep Learning, GRU, GloVe, Paragram, Text Classification, Kaggle, Python, PyTorch]
+summary: "Text classification using bi-directional GRU with GloVe and Paragram pre-trained embeddings to detect insincere questions on Quora at scale."
 ---
 
 # Table of Contents

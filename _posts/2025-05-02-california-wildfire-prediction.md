@@ -3,6 +3,7 @@ layout: post
 title: "Fire in Focus: Machine Learning Approach to Wildfire Prediction in Southern California"
 image: "/posts/wildfire-prediction-title-img.png"
 tags: [Machine Learning, Data Science, Classification, Python, Geospatial Analysis, Satellite Data, Ensemble Methods, LightGBM, XGBoost, Environmental Analytics]
+summary: "ML system predicting wildfire occurrence in Southern California using satellite imagery, weather, and environmental data. Ensemble methods (LightGBM, XGBoost) achieving AUC-ROC 0.94."
 ---
 
 # Table of Contents

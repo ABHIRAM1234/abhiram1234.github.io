@@ -3,6 +3,7 @@ layout: post
 title: "Instacart Market Basket: Analysis, Modeling, and Real-Time Reorder API"
 image: "/posts/instacart-title-img.png"
 tags: [Recommendation Systems, Market Basket Analysis, Machine Learning, Python, XGBoost, Clustering, Association Rules, Deployment, Docker, GCP]
+summary: "End-to-end reorder prediction combining customer segmentation, association rules mining, and XGBoost modeling. Deployed as a real-time API on Google Cloud Run."
 ---
 
 # Table of Contents
