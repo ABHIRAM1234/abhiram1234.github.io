@@ -5,7 +5,7 @@ image: "/posts/amex-img.png"
 tags: [Credit Risk, Machine Learning, Gradient Boosting, Feature Engineering, Optuna, LightGBM, Python]
 summary: "Credit risk modeling on American Express transaction data using LightGBM with extensive feature engineering and Optuna hyperparameter optimization."
 order: 5
-github_url: "https://github.com/ABHIRAM1234/amex-default-prediction"
+github_url: "https://github.com/abhirammv2000/amex-default-prediction"
 ---
 
 # Table of Contents
@@ -33,7 +33,7 @@ Interview summary: I built an end-to-end credit default risk model for the Ameri
 - **Objective:** Rank customers by default risk according to the AmEx metric.
 - **Approach:** Per-customer aggregations + LightGBM optimized with custom AmEx metric.
 - **Experimentation:** Databricks + MLflow for tracking and model registry.
-- **Code:** [GitHub Repository](https://github.com/ABHIRAM1234/amex-default-prediction)
+- **Code:** [GitHub Repository](https://github.com/abhirammv2000/amex-default-prediction)
 - **Highlights:** Scalable feature build (PySpark), clear CV design, readable code.
 
 ---
@@ -299,7 +299,7 @@ mlflow.lightgbm.autolog(log_models=True)
 
 ## <a name="links"></a>07. Links
 
-- **[GitHub Repository](https://github.com/ABHIRAM1234/amex-default-prediction)** — Code, feature pipeline, and model training for the AmEx default prediction project
+- **[GitHub Repository](https://github.com/abhirammv2000/amex-default-prediction)** — Code, feature pipeline, and model training for the AmEx default prediction project
 - **Kaggle competition:** [AmEx Default Prediction](https://www.kaggle.com/competitions/amex-default-prediction)
 
 

@@ -5,7 +5,7 @@ image: "/posts/h&m-rec-sys-title-img.png"
 tags: [Recommender Systems, Machine Learning, Collaborative Filtering, Kaggle, Python, LightGBM, Deep Learning, Ensemble]
 summary: "Personalized fashion recommendation engine combining collaborative filtering, LightGBM ranking, and deep learning to predict customer purchases from 31M+ transactions."
 order: 6
-github_url: "https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations"
+github_url: "https://github.com/abhirammv2000/H-M-Fashion-Recommendations"
 ---
 
 # Table of Contents
@@ -32,7 +32,7 @@ In the H&M Personalized Fashion Recommendations Kaggle competition, I set out to
 
 **💼 Business Impact**: This system addresses H&M's $20B+ annual revenue challenge of personalizing recommendations at scale, with potential to increase conversion rates by 15% and reduce customer acquisition costs by 30%.
 
-[GitHub Repository](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)
+[GitHub Repository](https://github.com/abhirammv2000/H-M-Fashion-Recommendations)
 
 At a glance
 - **Scores**: Public 0.0292, Private 0.02996
@@ -105,7 +105,7 @@ I engineered hundreds of features across multiple categories:
 - **Contextual Features**: Purchase context (weekday, holiday, etc.)
 
 ### Phase 4: Multi-Strategy Candidate Generation (Stage 1 – Retrieval)
-I implemented **two distinct recall strategies** to ensure candidate diversity (matching the [repo architecture](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)):
+I implemented **two distinct recall strategies** to ensure candidate diversity (matching the [repo architecture](https://github.com/abhirammv2000/H-M-Fashion-Recommendations)):
 
 #### 1. Collaborative Filtering (ALS, BPR) & embeddings
 - **Implicit ALS**: Latent user-item relationships ([e.g. julian3833](https://www.kaggle.com/code/julian3833/h-m-implicit-als-model-0-014))
@@ -120,7 +120,7 @@ I implemented **two distinct recall strategies** to ensure candidate diversity (
 The two strategies produce different candidate sets, which is key to the ensemble improvement (single strategy 0.0286 → ensemble 0.0292).
 
 ### Phase 5: Ranking Models (Stage 2 – Ranking)
-With diverse candidates from the two recall strategies, I trained **three ranking models** (per the [repo](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)) and blended them:
+With diverse candidates from the two recall strategies, I trained **three ranking models** (per the [repo](https://github.com/abhirammv2000/H-M-Fashion-Recommendations)) and blended them:
 
 #### LightGBM Ranker
 - **Purpose**: Learn optimal ranking of candidates (LambdaRank/MAP)
@@ -190,7 +190,7 @@ Raw parquet → feature build (weekly) → retrieval (ALS, co‑purchase, rules)
 - **Weight Optimization**: Systematic search for optimal combinations
 - **Robustness**: Multiple validation strategies
 
-### Repo structure (aligned with [GitHub](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations))
+### Repo structure (aligned with [GitHub](https://github.com/abhirammv2000/H-M-Fashion-Recommendations))
 - **Data**: `data/raw/` (articles, customers, transactions_train, sample_submission); `data/external/` for pre-trained embeddings (DSSM, YouTube-style, Word2Vec, image).
 - **Code**: `src/data` (DataHelper, metrics), `src/features` (base_features), `src/retrieval` (collector, rules); `notebooks/` for the pipeline (e.g. LGB Recall 1, then ranking/ensemble).
 
@@ -385,7 +385,7 @@ ranker = DNNRanker(len(features))
 This project benefited significantly from the Kaggle community's collective knowledge:
 
 ### Repository & base implementation
-- **This portfolio project**: [ABHIRAM1234/H-M-Fashion-Recommendations](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations) — solution to Kaggle H&M Personalized Fashion Recommendations (two-stage retrieval + ranking, LightGBM + DNN ensemble).
+- **This portfolio project**: [abhirammv2000/H-M-Fashion-Recommendations](https://github.com/abhirammv2000/H-M-Fashion-Recommendations) — solution to Kaggle H&M Personalized Fashion Recommendations (two-stage retrieval + ranking, LightGBM + DNN ensemble).
 - **Forked from / builds upon**: [Wp-Zhang/H-M-Fashion-RecSys](https://github.com/Wp-Zhang/H-M-Fashion-RecSys), with enhancements to documentation, structure, and pipeline.
 
 ### Kaggle community influences
@@ -406,7 +406,7 @@ This project benefited significantly from the Kaggle community's collective know
 
 ## <a name="project-links"></a>08. Project Links
 
-- **[GitHub – H-M-Fashion-Recommendations](https://github.com/ABHIRAM1234/H-M-Fashion-Recommendations)** — Solution to Kaggle H&M Personalized Fashion Recommendations (two-stage retrieval + ranking, LightGBM + DNN ensemble)
+- **[GitHub – H-M-Fashion-Recommendations](https://github.com/abhirammv2000/H-M-Fashion-Recommendations)** — Solution to Kaggle H&M Personalized Fashion Recommendations (two-stage retrieval + ranking, LightGBM + DNN ensemble)
 - **[Kaggle Competition](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations)**
 - **[Competition Notebooks](https://www.kaggle.com/competitions/h-and-m-personalized-fashion-recommendations/code)**
 

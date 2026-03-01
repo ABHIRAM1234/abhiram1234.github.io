@@ -37,7 +37,7 @@ At a glance
 - Objective: classify insincere questions with high F1 on a highly imbalanced dataset
 - Approach: strong preprocessing + TF‑IDF baseline → CNN/LSTM → BiGRU with pre‑trained embeddings → BERT fine‑tune
 - Deployment: optional FastAPI microservice for real‑time inference
-- Code: [GitHub Repo](https://github.com/ABHIRAM1234/Quora-Insincere-Questions-Classification)
+- Code: [GitHub Repo](https://github.com/abhirammv2000/Quora-Insincere-Questions-Classification)
 
 ---
 
@@ -261,7 +261,7 @@ trainer.train()
 ## <a name="project-links"></a>07. Project Links
 
 - **[Kaggle Competition](https://www.kaggle.com/competitions/quora-insincere-questions-classification/overview)**
-- **[GitHub Repository](https://github.com/ABHIRAM1234/Quora-Insincere-Questions-Classification)**
+- **[GitHub Repository](https://github.com/abhirammv2000/Quora-Insincere-Questions-Classification)**
 - **[Quora Platform](https://www.quora.com/)**
 - **[GloVe Embeddings](https://nlp.stanford.edu/projects/glove/)**
 - **[Paragram Embeddings](https://www.cs.cmu.edu/~jwieting/)**

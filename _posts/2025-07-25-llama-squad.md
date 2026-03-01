@@ -30,7 +30,7 @@ This project demonstrates an end-to-end workflow for specializing a general-purp
 
 **💼 Business Impact**: This system addresses the $50B+ enterprise AI market by solving the critical hallucination problem, enabling reliable AI deployment in mission-critical applications like customer support, legal research, and medical diagnosis.
 
-**Code:** [GitHub Repository](https://github.com/ABHIRAM1234/llama-squad)
+**Code:** [GitHub Repository](https://github.com/abhirammv2000/llama-squad)
 
 ___
 
@@ -161,4 +161,4 @@ This project showcases the ability to deliver **enterprise-grade AI solutions** 
 
 The complete code, training scripts, and detailed documentation are available on my GitHub.
 
-[**View on GitHub: ABHIRAM1234/llama-squad**](https://github.com/ABHIRAM1234/llama-squad)
+[**View on GitHub: abhirammv2000/llama-squad**](https://github.com/abhirammv2000/llama-squad)

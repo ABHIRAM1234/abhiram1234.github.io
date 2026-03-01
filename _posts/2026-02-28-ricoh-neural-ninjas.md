@@ -5,7 +5,7 @@ image: "/posts/ricoh-img.png"
 tags: [RAG, LangGraph, NLP, Python, ChromaDB, Streamlit, Agentic AI]
 summary: "Agentic AI technical support system using LangGraph, hybrid retrieval (ChromaDB + BM25 + RRF), and Claude for grounded, cited answers from Ricoh product manuals. Built at HackVerse 2026."
 order: 3
-github_url: "https://github.com/ABHIRAM1234/Ricoh_Neural_Ninjas"
+github_url: "https://github.com/abhirammv2000/Ricoh_Neural_Ninjas"
 ---
 
 # Table of Contents
@@ -29,7 +29,7 @@ I built an **agentic AI technical support system** called **RicohLibrary** that 
 **At a glance**
 - **Problem:** Field technicians waste significant time searching through hundreds of pages of Ricoh product manuals to find specific procedures, error codes, and configuration steps.
 - **Solution:** An intelligent agentic system that ingests manuals, understands natural-language questions, retrieves relevant passages, and generates accurate, cited answers with zero hallucination.
-- **Code:** [GitHub Repository](https://github.com/ABHIRAM1234/Ricoh_Neural_Ninjas)
+- **Code:** [GitHub Repository](https://github.com/abhirammv2000/Ricoh_Neural_Ninjas)
 
 ---
 
@@ -141,4 +141,4 @@ Evaluated on **10 official hackathon test questions**:
 
 ## <a name="links"></a>08. Project Links
 
-- **GitHub:** [ABHIRAM1234/Ricoh_Neural_Ninjas](https://github.com/ABHIRAM1234/Ricoh_Neural_Ninjas)
+- **GitHub:** [abhirammv2000/Ricoh_Neural_Ninjas](https://github.com/abhirammv2000/Ricoh_Neural_Ninjas)

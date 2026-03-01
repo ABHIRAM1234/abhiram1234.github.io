@@ -14,7 +14,7 @@ summary: "NLP text segmentation system using PyTorch Transformers and ensemble m
 *   [04. Results & Validation](#results)
 *   [05. Retrospective & Future Work](#learnings)
 
-**🔗 [View on GitHub](https://github.com/ABHIRAM1234/Evaluating-Student-Writing/tree/main)**
+**🔗 [View on GitHub](https://github.com/abhirammv2000/Evaluating-Student-Writing/tree/main)**
 
 ---
 
@@ -178,4 +178,4 @@ This project showcases the ability to deliver **innovative AI solutions** that d
 
 ### Project Links
 
-- **[GitHub Repository](https://github.com/ABHIRAM1234/Evaluating-Student-Writing/tree/main)** — Code, notebooks, and documentation for the Feedback Prize / Evaluating Student Writing project
+- **[GitHub Repository](https://github.com/abhirammv2000/Evaluating-Student-Writing/tree/main)** — Code, notebooks, and documentation for the Feedback Prize / Evaluating Student Writing project

@@ -33,7 +33,7 @@ I developed an interactive, real-time earthquake tracking dashboard using Tablea
 
 **⚡ Real-Time Performance**: System processes 50,000+ earthquake events annually with 5-minute update frequency, serving emergency responders, researchers, and the general public with critical seismic information.
 
-**Code:** [GitHub Repository](https://github.com/ABHIRAM1234/earthquake-dashboard) | [**Live Dashboard**](https://public.tableau.com/views/DSIEarthquakeDashboard/DSIEarthquakeTracker?:embed=yes&:display_count=yes&:showVizHome=no)
+**Code:** [GitHub Repository](https://github.com/abhirammv2000/earthquake-dashboard) | [**Live Dashboard**](https://public.tableau.com/views/DSIEarthquakeDashboard/DSIEarthquakeTracker?:embed=yes&:display_count=yes&:showVizHome=no)
 
 ---
 
@@ -253,7 +253,7 @@ I adopted a **user-centered design approach** that prioritizes:
 
 ## <a name="project-links"></a>09. Project Links
 
-- **[GitHub Repository](https://github.com/ABHIRAM1234/earthquake-dashboard)** — Code and documentation for the earthquake tracking dashboard
+- **[GitHub Repository](https://github.com/abhirammv2000/earthquake-dashboard)** — Code and documentation for the earthquake tracking dashboard
 - **[Live Dashboard](https://public.tableau.com/views/DSIEarthquakeDashboard/DSIEarthquakeTracker?:embed=yes&:display_count=yes&:showVizHome=no)**
 - **[USGS Earthquake API](https://earthquake.usgs.gov/fdsnws/event/1/)**
 - **[Tableau Public Profile](https://public.tableau.com/app/profile/abhiram)**

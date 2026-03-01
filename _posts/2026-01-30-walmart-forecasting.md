@@ -5,7 +5,7 @@ image: "/posts/m5-forecasting-title-image.png"
 tags: [Machine Learning, Time Series, Forecasting, LightGBM, Python, Pandas, MLOps, AWS, SageMaker, QuickSight]
 summary: "End-to-end sales forecasting system for 30K+ Walmart SKUs using LightGBM on 46M+ rows, achieving top-tier WRMSSE 0.51. Deployed on AWS SageMaker with QuickSight dashboards."
 order: 1
-github_url: "https://github.com/ABHIRAM1234/walmart-forecasting"
+github_url: "https://github.com/abhirammv2000/walmart-forecasting"
 ---
 
 # Table of Contents
@@ -32,7 +32,7 @@ ___
 **What this project is (in plain English):**  
 I built an **end-to-end sales forecasting system** for the **M5 (Walmart) Kaggle competition**. The task: predict **daily unit sales** for **tens of thousands of products** (SKUs) across **10 stores** for the **next 28 days**. The business goal is inventory and demand planning: accurate forecasts reduce stock-outs (lost sales) and overstock (wasted capital and shelf space). The data is huge (46M+ rows of historical sales, plus calendar events and prices), so I (1) **engineered a scalable data pipeline** (preprocessing, cleaning, memory-efficient transforms), (2) **created hundreds of features** (seasonality, price effects, special events, lags, rolling stats), (3) **trained and validated a LightGBM model** with a time-aware split and the competition metric (WRMSSE), and (4) **deployed the pipeline on AWS** (e.g. SageMaker, QuickSight) so the system is production-style. I chose **LightGBM** over ARIMA/Prophet/LSTM for this scale and tabular structure, and documented why. The final model achieved **WRMSSE 0.51** (top-tier performance). I approached the project step by step so someone who doesn't know M5 can follow: problem framing → data and preprocessing → feature engineering → modeling and validation → deployment and learnings.
 
-**Start:** September 2024 • **Scope:** 30,490 SKUs × 10 stores × 28‑day horizon • **Kaggle:** [M5 Forecasting – Accuracy](https://www.kaggle.com/c/m5-forecasting-accuracy) • **Code:** [GitHub Repo](https://github.com/ABHIRAM1234/walmart-forecasting)
+**Start:** September 2024 • **Scope:** 30,490 SKUs × 10 stores × 28‑day horizon • **Kaggle:** [M5 Forecasting – Accuracy](https://www.kaggle.com/c/m5-forecasting-accuracy) • **Code:** [GitHub Repo](https://github.com/abhirammv2000/walmart-forecasting)
 
 **🏆 Competition Excellence**: Top-tier performance in the world's largest retail forecasting competition with 5,000+ participants
 
@@ -525,5 +525,5 @@ ___
 
 ## Project Links
 
-- **[GitHub Repository](https://github.com/ABHIRAM1234/walmart-forecasting)** — Code, feature pipeline, and model training for M5 / Walmart sales forecasting
+- **[GitHub Repository](https://github.com/abhirammv2000/walmart-forecasting)** — Code, feature pipeline, and model training for M5 / Walmart sales forecasting
 - **Kaggle:** [M5 Forecasting – Accuracy](https://www.kaggle.com/c/m5-forecasting-accuracy)

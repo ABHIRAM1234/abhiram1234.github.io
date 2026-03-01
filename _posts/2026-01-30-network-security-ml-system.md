@@ -5,7 +5,7 @@ image: "/posts/network-security-img.png"
 tags: [MLOps, Network Security, Machine Learning, Python, FastAPI, Streamlit, Airflow, MLflow, Docker, AWS, CI/CD]
 summary: "End-to-end MLOps pipeline for malicious URL detection with Airflow orchestration, MLflow tracking, FastAPI/Streamlit serving, and Docker + AWS CI/CD deployment."
 order: 4
-github_url: "https://github.com/ABHIRAM1234/Network-Security-ML-System"
+github_url: "https://github.com/abhirammv2000/Network-Security-ML-System"
 ---
 
 # Table of Contents
@@ -30,7 +30,7 @@ I built an **end-to-end MLOps system** that **detects and classifies malicious U
 **At a glance**
 - **Objective:** Detect and classify URLs as Malicious, Suspicious, or Safe to improve web security.
 - **Approach:** 30 URL features → ML classification (Random Forest, GridSearchCV) → Streamlit (single URL) + FastAPI (batch + /train) → Airflow DAGs for training/prediction → MLflow on AWS → Docker + EC2 + GitHub Actions CI/CD.
-- **Code:** [GitHub Repository](https://github.com/ABHIRAM1234/Network-Security-ML-System) (forked from [Neeraj876/Network-Security-ML-System](https://github.com/Neeraj876/Network-Security-ML-System)).
+- **Code:** [GitHub Repository](https://github.com/abhirammv2000/Network-Security-ML-System) (forked from [Neeraj876/Network-Security-ML-System](https://github.com/Neeraj876/Network-Security-ML-System)).
 - **Live demo:** [Streamlit app](https://network-security-system-mlops-6nshvkcv8cxrngosbdlrhb.streamlit.app/) for real-time single-URL predictions.
 
 ---
@@ -166,7 +166,7 @@ I **containerized** the app with **Docker**, stored images in **AWS ECR**, and r
 
 ## <a name="links"></a>09. Project Links
 
-- **[GitHub Repository](https://github.com/ABHIRAM1234/Network-Security-ML-System)** — MLOps solution for malicious URL detection (Streamlit, FastAPI, Airflow, MLflow, Docker, AWS)
+- **[GitHub Repository](https://github.com/abhirammv2000/Network-Security-ML-System)** — MLOps solution for malicious URL detection (Streamlit, FastAPI, Airflow, MLflow, Docker, AWS)
 - **[Streamlit live demo](https://network-security-system-mlops-6nshvkcv8cxrngosbdlrhb.streamlit.app/)** — Real-time single-URL prediction
 
 ---

@@ -5,7 +5,7 @@ image: "/posts/streamlit-app-preview-img.png"
 tags: [NLP, Sentiment Analysis, Topic Modeling, Python, VADER, LDA, Streamlit, LangChain, Classification]
 summary: "NLP pipeline analyzing Amazon product reviews with VADER sentiment, LDA topic modeling, and ML classification (~96% accuracy). Includes a Streamlit dashboard with LangChain-powered LLM recommendations."
 order: 2
-github_url: "https://github.com/ABHIRAM1234/amazon-reviews-nlp-analysis"
+github_url: "https://github.com/abhirammv2000/amazon-reviews-nlp-analysis"
 ---
 
 # Table of Contents
@@ -32,7 +32,7 @@ I analyzed **customer reviews** for a single Amazon product—**"Miracle Noodle 
 - **NLP:** Text preprocessing, **VADER** sentiment analysis, **LDA** topic modeling
 - **ML:** Binary review classification (high vs low sentiment); best model: **Logistic Regression + TF-IDF** (~96% test accuracy)
 - **App:** [Streamlit dashboard](https://amazon-reviews-nlp-analysis.streamlit.app/) with Plotly visualizations and LangChain-powered recommendations
-- **Repo:** [ABHIRAM1234/amazon-reviews-nlp-analysis](https://github.com/ABHIRAM1234/amazon-reviews-nlp-analysis) (forked from [jirvingphd/amazon-reviews-nlp-analysis](https://github.com/jirvingphd/amazon-reviews-nlp-analysis))
+- **Repo:** [abhirammv2000/amazon-reviews-nlp-analysis](https://github.com/abhirammv2000/amazon-reviews-nlp-analysis) (forked from [jirvingphd/amazon-reviews-nlp-analysis](https://github.com/jirvingphd/amazon-reviews-nlp-analysis))
 
 ---
 
@@ -200,7 +200,7 @@ Part-04: Deep NLP text prep, sequence models, PyTorch pipelines. Part-05: Stream
 
 ## <a name="links"></a>09. Project Links
 
-- **GitHub:** [ABHIRAM1234/amazon-reviews-nlp-analysis](https://github.com/ABHIRAM1234/amazon-reviews-nlp-analysis) — NLP analysis of Amazon Reviews with companion Streamlit app and LLM/AI-based recommendations
+- **GitHub:** [abhirammv2000/amazon-reviews-nlp-analysis](https://github.com/abhirammv2000/amazon-reviews-nlp-analysis) — NLP analysis of Amazon Reviews with companion Streamlit app and LLM/AI-based recommendations
 - **Streamlit app:** [Amazon Reviews NLP Analysis & Predictions](https://amazon-reviews-nlp-analysis.streamlit.app/)
 
 ---

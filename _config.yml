@@ -23,7 +23,7 @@ avatar_image: /img/profile_picture.JPG
 #-------------------------------
 # Contact links
 linkedin: "https://www.linkedin.com/in/abhiram-m-v-4a0413182/"
-github: "https://github.com/ABHIRAM1234"
+github: "https://github.com/abhirammv2000"
 
 paginate: 6
 paginate_path: "/page/:num"

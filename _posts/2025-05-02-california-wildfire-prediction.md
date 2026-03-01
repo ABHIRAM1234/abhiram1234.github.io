@@ -32,11 +32,11 @@ I developed a comprehensive machine learning system to predict wildfire occurren
 
 **📊 Scale & Performance**: The system analyzes over 113,000 instances of wildfire and non-wildfire events from 2020 to 2024, processing data from NASA's FIRMS API and Open-Meteo to identify critical risk factors. Using ensemble methods including **LightGBM** and **XGBoost**, the model achieves an **AUC-ROC score of 0.94** and **85% accuracy**, providing actionable insights for wildfire prevention and emergency response.
 
-**Code:** [GitHub Repository](https://github.com/ABHIRAM1234/wildfire-prediction)
+**Code:** [GitHub Repository](https://github.com/abhirammv2000/wildfire-prediction)
 
 **💼 Business Impact**: This system addresses California's $50B+ annual wildfire economic impact, with potential to save $2B+ annually through early warning systems and improved resource allocation.
 
-[**Full Project Details**](https://abhiram1234.github.io/Machine-Learning-CSCI-5612-872-Project/)
+[**Full Project Details**](https://abhirammv2000.github.io/Machine-Learning-CSCI-5612-872-Project/)
 
 ---
 
@@ -400,10 +400,10 @@ The system supports long-term planning and policy development:
 
 ## <a name="project-links"></a>10. Project Links
 
-- **[Full Project Details](https://abhiram1234.github.io/Machine-Learning-CSCI-5612-872-Project/)**
+- **[Full Project Details](https://abhirammv2000.github.io/Machine-Learning-CSCI-5612-872-Project/)**
 - **[NASA FIRMS API](https://firms.modaps.eosdis.nasa.gov/)**
 - **[Open-Meteo API](https://open-meteo.com/)**
-- **[GitHub Repository](https://github.com/ABHIRAM1234/wildfire-prediction)**
+- **[GitHub Repository](https://github.com/abhirammv2000/wildfire-prediction)**
 
 ---
 
