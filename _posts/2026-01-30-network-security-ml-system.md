@@ -4,7 +4,8 @@ title: "Network Security ML System: MLOps for Malicious URL Detection"
 image: "/posts/network-security-img.png"
 tags: [MLOps, Network Security, Machine Learning, Python, FastAPI, Streamlit, Airflow, MLflow, Docker, AWS, CI/CD]
 summary: "End-to-end MLOps pipeline for malicious URL detection with Airflow orchestration, MLflow tracking, FastAPI/Streamlit serving, and Docker + AWS CI/CD deployment."
-order: 3
+order: 4
+github_url: "https://github.com/ABHIRAM1234/Network-Security-ML-System"
 ---
 
 # Table of Contents
