@@ -383,7 +383,20 @@ layout: null
         /* ============ EXPERIENCE ============ */
         .experience { padding: var(--section-padding); background: var(--bg-secondary); }
 
-        .exp-timeline { display: flex; flex-direction: column; gap: 24px; }
+        .exp-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .exp-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--border));
+        }
 
         .exp-card {
             background: var(--bg-card);
@@ -392,12 +405,33 @@ layout: null
             padding: 32px;
             transition: all var(--transition);
             position: relative;
+            margin-bottom: 24px;
+        }
+
+        .exp-card:last-child { margin-bottom: 0; }
+
+        .exp-card::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 36px;
+            width: 14px;
+            height: 14px;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            z-index: 1;
         }
 
         .exp-card:hover {
             border-color: var(--border-hover);
             box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
             transform: translateY(-2px);
+        }
+
+        .exp-card:hover::before {
+            background: var(--accent);
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
         }
 
         .exp-header {
@@ -795,7 +829,7 @@ layout: null
                 </div>
             </div>
             <div class="hero-image">
-                <img src="/img/profile_picture.JPG" alt="Abhiram M V">
+                <img src="/img/whatsapp-img.jpeg" alt="Abhiram M V">
             </div>
         </div>
     </div>
