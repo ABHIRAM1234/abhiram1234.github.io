@@ -173,7 +173,38 @@ layout: null
             pointer-events: none;
         }
 
-        .hero-content { position: relative; z-index: 1; }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+        }
+
+        .hero-text { flex: 1; }
+
+        .hero-image {
+            flex: 0 0 280px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--border);
+            box-shadow: 0 8px 40px rgba(59, 130, 246, 0.15);
+            transition: all var(--transition);
+        }
+
+        .hero-image img:hover {
+            border-color: var(--accent);
+            box-shadow: 0 12px 50px rgba(59, 130, 246, 0.25);
+            transform: scale(1.03);
+        }
 
         .hero-badge {
             display: inline-flex;
@@ -444,29 +475,41 @@ layout: null
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 28px;
+            overflow: hidden;
             transition: all var(--transition);
             display: flex;
             flex-direction: column;
+        }
+
+        .project-thumbnail {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: var(--bg-secondary);
+        }
+
+        .project-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .project-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .project-card:hover {
             border-color: var(--border-hover);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transform: translateY(-4px);
-        }
-
-        .project-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--tag-bg);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-            color: var(--accent);
         }
 
         .project-title {
@@ -690,6 +733,11 @@ layout: null
             .nav-links a { width: 100%; text-align: left; padding: 12px 16px; }
             .nav-toggle { display: block; }
 
+            .hero-content { flex-direction: column-reverse; text-align: center; gap: 32px; }
+            .hero-image { flex: none; }
+            .hero-image img { width: 200px; height: 200px; }
+            .hero-badge { justify-content: center; }
+            .hero-ctas { justify-content: center; }
             .hero-name { font-size: 2.2rem; }
             .stats-row { grid-template-columns: repeat(3, 1fr); gap: 12px; }
             .stat-card { padding: 20px 12px; }
@@ -718,7 +766,6 @@ layout: null
             <a href="#projects">Projects</a>
             <a href="#education">Education</a>
             <a href="#contact">Contact</a>
-            <a href="/docs/resume.docx" class="nav-resume">Resume</a>
         </div>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
@@ -730,20 +777,25 @@ layout: null
 <section class="hero" id="hero">
     <div class="container">
         <div class="hero-content" data-animate>
-            <div class="hero-badge">
-                <span class="dot"></span>
-                Open to new opportunities
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Open to new opportunities
+                </div>
+                <p class="hero-greeting">Hi, I'm</p>
+                <h1 class="hero-name">Abhiram <span class="highlight">M V.</span></h1>
+                <p class="hero-title">Data Scientist &amp; MS Candidate at CU Boulder</p>
+                <div class="hero-ctas">
+                    <a href="#projects" class="btn btn-primary">
+                        View My Work <i class="fas fa-arrow-down"></i>
+                    </a>
+                    <a href="/img/Abhiram_M_V_Resume.pdf" class="btn btn-outline">
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                </div>
             </div>
-            <p class="hero-greeting">Hi, I'm</p>
-            <h1 class="hero-name">Abhiram <span class="highlight">M V.</span></h1>
-            <p class="hero-title">Data Scientist &amp; MS Candidate at CU Boulder</p>
-            <div class="hero-ctas">
-                <a href="#projects" class="btn btn-primary">
-                    View My Work <i class="fas fa-arrow-down"></i>
-                </a>
-                <a href="/docs/resume.docx" class="btn btn-outline">
-                    <i class="fas fa-download"></i> Download CV
-                </a>
+            <div class="hero-image">
+                <img src="/img/profile_picture.JPG" alt="Abhiram M V">
             </div>
         </div>
     </div>
@@ -864,29 +916,17 @@ layout: null
         </p>
 
         <div class="projects-grid">
-            {% for post in site.posts %}
+            {% assign featured = site.posts | where_exp: "post", "post.order" | sort: "order" %}
+            {% assign regular = site.posts | where_exp: "post", "post.order == nil" %}
+            {% assign all_posts = featured | concat: regular %}
+            {% for post in all_posts %}
             <div class="project-card" data-animate>
-                <div class="project-icon">
-                    {% if post.tags contains 'NLP' or post.tags contains 'LLM' %}
-                        <i class="fas fa-language"></i>
-                    {% elsif post.tags contains 'Forecasting' or post.tags contains 'Time Series' %}
-                        <i class="fas fa-chart-line"></i>
-                    {% elsif post.tags contains 'Recommender Systems' or post.tags contains 'Recommendation Systems' %}
-                        <i class="fas fa-thumbs-up"></i>
-                    {% elsif post.tags contains 'MLOps' or post.tags contains 'Docker' %}
-                        <i class="fas fa-gears"></i>
-                    {% elsif post.tags contains 'Tableau' or post.tags contains 'Data Visualization' %}
-                        <i class="fas fa-chart-pie"></i>
-                    {% elsif post.tags contains 'Classification' %}
-                        <i class="fas fa-shield-halved"></i>
-                    {% elsif post.tags contains 'Clustering' or post.tags contains 'Segmentation' %}
-                        <i class="fas fa-users"></i>
-                    {% elsif post.tags contains 'Credit Risk' %}
-                        <i class="fas fa-credit-card"></i>
-                    {% else %}
-                        <i class="fas fa-code"></i>
-                    {% endif %}
+                {% if post.image %}
+                <div class="project-thumbnail">
+                    <img src="/img{{ post.image }}" alt="{{ post.title }}" loading="lazy" onerror="this.parentElement.style.display='none'">
                 </div>
+                {% endif %}
+                <div class="project-body">
                 <h3 class="project-title">{{ post.title }}</h3>
                 <p class="project-description">{{ post.summary }}</p>
                 <div class="project-tags">
@@ -903,6 +943,7 @@ layout: null
                         <i class="fab fa-github"></i> Code
                     </a>
                     {% endif %}
+                </div>
                 </div>
             </div>
             {% endfor %}

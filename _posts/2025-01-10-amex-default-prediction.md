@@ -4,6 +4,7 @@ title: "AmEx Default Prediction: End-to-End Risk Modeling With the AmEx Metric"
 image: "/posts/amex-img.png"
 tags: [Credit Risk, Machine Learning, Gradient Boosting, Feature Engineering, Optuna, LightGBM, Python]
 summary: "Credit risk modeling on American Express transaction data using LightGBM with extensive feature engineering and Optuna hyperparameter optimization."
+order: 1
 ---
 
 # Table of Contents
