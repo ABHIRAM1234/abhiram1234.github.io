@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | Abhiram M V</title>
+    <meta name="description" content="{{ page.summary | default: page.title }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-primary: #0b0b0f;
+            --bg-secondary: #111118;
+            --bg-card: #16161f;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --border: rgba(255, 255, 255, 0.06);
+            --tag-bg: rgba(59, 130, 246, 0.1);
+            --tag-text: #93c5fd;
+            --nav-height: 70px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent-light); text-decoration: none; transition: color var(--transition); }
+        a:hover { color: var(--accent); }
+
+        /* NAV */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: var(--nav-height);
+            background: rgba(11, 11, 15, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .nav-logo span { color: var(--accent); }
+
+        .nav-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all var(--transition);
+        }
+
+        .nav-back:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* POST HEADER */
+        .post-header {
+            padding-top: calc(var(--nav-height) + 60px);
+            padding-bottom: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        .post-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .post-tag {
+            padding: 4px 14px;
+            background: var(--tag-bg);
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--tag-text);
+        }
+
+        .post-hero-img {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            padding: 0 24px;
+        }
+
+        .post-hero-img img {
+            width: 100%;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+        }
+
+        /* POST CONTENT */
+        .post-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .post-content h1, .post-content h2, .post-content h3,
+        .post-content h4, .post-content h5, .post-content h6 {
+            color: var(--text-primary);
+            margin-top: 2em;
+            margin-bottom: 0.75em;
+            line-height: 1.3;
+        }
+
+        .post-content h1 { font-size: 2rem; }
+        .post-content h2 { font-size: 1.6rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4em; }
+        .post-content h3 { font-size: 1.3rem; }
+        .post-content h4 { font-size: 1.1rem; }
+
+        .post-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.2em;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .post-content strong { color: var(--text-primary); }
+
+        .post-content ul, .post-content ol {
+            color: var(--text-secondary);
+            margin-bottom: 1.2em;
+            padding-left: 1.5em;
+        }
+
+        .post-content li {
+            margin-bottom: 0.5em;
+            line-height: 1.7;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            margin: 1.5em 0;
+        }
+
+        .post-content blockquote {
+            border-left: 3px solid var(--accent);
+            padding: 12px 20px;
+            margin: 1.5em 0;
+            background: var(--bg-card);
+            border-radius: 0 8px 8px 0;
+            color: var(--text-secondary);
+        }
+
+        .post-content code {
+            background: var(--bg-card);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: var(--accent-light);
+        }
+
+        .post-content pre {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            overflow-x: auto;
+            margin: 1.5em 0;
+        }
+
+        .post-content pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5em 0;
+            font-size: 0.9rem;
+        }
+
+        .post-content th, .post-content td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .post-content th {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .post-content td { color: var(--text-secondary); }
+
+        .post-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2em 0;
+        }
+
+        .post-content a { color: var(--accent-light); text-decoration: underline; text-underline-offset: 3px; }
+        .post-content a:hover { color: var(--accent); }
+
+        /* FOOTER */
+        .post-footer {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .post-footer p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--accent);
+            color: #fff;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+            transition: all var(--transition);
+        }
+
+        .back-link:hover {
+            background: var(--accent-light);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .post-title { font-size: 1.6rem; }
+            .post-content h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-inner">
+        <a href="/" class="nav-logo">Abhiram<span>.</span></a>
+        <a href="/#projects" class="nav-back">
+            <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+    </div>
+</nav>
+
+<header class="post-header">
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.tags.size > 0 %}
+    <div class="post-meta">
+        <div class="post-tags">
+            {% for tag in page.tags %}
+            <span class="post-tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</header>
+
+{% if page.image %}
+<div class="post-hero-img">
+    <img src="/img{{ page.image }}" alt="{{ page.title }}">
+</div>
+{% endif %}
+
+<article class="post-content">
+    {{ content }}
+</article>
+
+<div class="post-footer">
+    <a href="/#projects" class="back-link">
+        <i class="fas fa-arrow-left"></i> Back to All Projects
+    </a>
+    <p>&copy; 2026 Abhiram M V. Built with Jekyll & GitHub Pages.</p>
+</div>
+
+</body>
+</html>

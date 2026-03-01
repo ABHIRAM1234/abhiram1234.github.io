@@ -604,11 +604,7 @@ layout: null
         /* ============ EDUCATION ============ */
         .education { padding: var(--section-padding); background: var(--bg-secondary); }
 
-        .edu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-        }
+        .edu-grid { max-width: 800px; }
 
         .edu-card {
             background: var(--bg-card);
@@ -623,24 +619,92 @@ layout: null
             transform: translateY(-2px);
         }
 
+        .edu-card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .edu-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #22c55e;
+            flex-shrink: 0;
+        }
+
+        .edu-info { flex: 1; }
+
         .edu-school {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .edu-degree {
             font-size: 0.95rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
+            color: #22c55e;
             font-weight: 500;
         }
 
-        .edu-date {
-            font-size: 0.85rem;
-            color: var(--text-muted);
+        .edu-date-badge {
+            font-size: 0.8rem;
             font-weight: 500;
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 100px;
+            white-space: nowrap;
+        }
+
+        .edu-details { padding-left: 60px; }
+
+        .edu-gpa {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .edu-coursework-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .edu-coursework-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .edu-course-tag {
+            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .edu-card-header { flex-direction: column; }
+            .edu-details { padding-left: 0; }
         }
 
         /* ============ CONTACT ============ */
@@ -900,7 +964,7 @@ layout: null
             <div class="exp-card" data-animate>
                 <div class="exp-header">
                     <div class="exp-role">Data Science Intern</div>
-                    <span class="exp-date">May 2025 – Present</span>
+                    <span class="exp-date">May 2025 – Sep 2025</span>
                 </div>
                 <div class="exp-company">ConverSight</div>
                 <ul class="exp-bullets">
@@ -950,9 +1014,7 @@ layout: null
         </p>
 
         <div class="projects-grid">
-            {% assign featured = site.posts | where_exp: "post", "post.order" | sort: "order" %}
-            {% assign regular = site.posts | where_exp: "post", "post.order == nil" %}
-            {% assign all_posts = featured | concat: regular %}
+            {% assign all_posts = site.posts | where_exp: "post", "post.order" | sort: "order" %}
             {% for post in all_posts %}
             <div class="project-card" data-animate>
                 {% if post.image %}
@@ -993,14 +1055,27 @@ layout: null
 
         <div class="edu-grid">
             <div class="edu-card" data-animate>
-                <div class="edu-school">University of Colorado, Boulder</div>
-                <div class="edu-degree">Master of Science, Data Science</div>
-                <div class="edu-date">Aug 2024 – May 2026</div>
-            </div>
-            <div class="edu-card" data-animate>
-                <div class="edu-school">Dayananda Sagar University</div>
-                <div class="edu-degree">B.Tech, Electronics & Communication Engineering</div>
-                <div class="edu-date">2018 – 2022</div>
+                <div class="edu-card-header">
+                    <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="edu-info">
+                        <div class="edu-school">University of Colorado, Boulder</div>
+                        <div class="edu-degree">Master of Science, Data Science</div>
+                    </div>
+                    <span class="edu-date-badge">Aug 2024 – May 2026</span>
+                </div>
+                <div class="edu-details">
+                    <div class="edu-gpa">GPA: 4.0/4.0</div>
+                    <div class="edu-coursework">
+                        <div class="edu-coursework-label"><i class="fas fa-book-open"></i> Relevant Coursework</div>
+                        <div class="edu-coursework-tags">
+                            <span class="edu-course-tag">Statistics</span>
+                            <span class="edu-course-tag">Data Mining</span>
+                            <span class="edu-course-tag">Machine Learning for Data Science</span>
+                            <span class="edu-course-tag">Data Visualization</span>
+                            <span class="edu-course-tag">Big Data</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
